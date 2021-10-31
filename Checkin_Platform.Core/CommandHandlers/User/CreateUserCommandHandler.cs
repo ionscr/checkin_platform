@@ -28,6 +28,7 @@ namespace Checkin_Platform.Core.CommandHandlers.User
                 Department = request.UserDto.Department,
                 Group = request.UserDto.Group,
                 Year = request.UserDto.Year
+                
             }) ;
             return true;
         }

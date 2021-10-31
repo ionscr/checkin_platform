@@ -9,7 +9,7 @@ namespace Checkin_Platform.Domain
         public long Id { get; set; }
         public DateTime DateTime { get; set; }
         public Classroom Classroom { get; set; }
-        public Class classn { get; set; }
+        public Class Classn { get; set; }
         public List<User> Reservations { get; set; }
     }
 }
