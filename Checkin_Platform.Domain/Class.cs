@@ -4,23 +4,13 @@ using System.Text;
 
 namespace Checkin_Platform.Domain
 {
-    class Class
+   public class Class
     {
-        private long id;
-        private string name;
-        private User teacher;
-        private int year;
-        private string section;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public User Teacher { get; set; }
+        public int Year {get; set; }
+        public string Section { get; set; }
 
-        public Class()
-        {
-        }
-        public Class(string name, User teacher, int year, string section)
-        {
-            this.name = name;
-            this.teacher = teacher;
-            this.year = year;
-            this.section = section;
-        }
     }
 }

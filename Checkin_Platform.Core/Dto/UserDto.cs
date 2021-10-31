@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Checkin_Platform.Domain
+namespace Checkin_Platform.Core.Dto
 {
-    public class User
+    public class UserDto
     {
-        private int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Role { get; set; }
         public int Year { get; set; }
         public string Department { get; set; }
         public string Group { get; set; }
-
     }
 }

@@ -5,4 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Checkin_Platform.Core\Checkin_Platform.Core.csproj" />
+    <ProjectReference Include="..\Checkin_Platform.Domain\Checkin_Platform.Domain.csproj" />
+    <ProjectReference Include="..\Checkin_Platform.Infrastructure\Checkin_Platform.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

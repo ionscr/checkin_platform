@@ -4,22 +4,12 @@ using System.Text;
 
 namespace Checkin_Platform.Domain
 {
-    class Classroom
+    public class Classroom
     {
-        private long id;
-        private string name;
-        private string location;
-        private int capacity;
-
-        public Classroom()
-        {
-        }
-
-        public Classroom(string name, string location, int capacity)
-        {
-            this.name = name;
-            this.location = location;
-            this.capacity = capacity;
-        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public int Capacity { get; set; }
+        public List<Feature> Features { get; set; }
     }
 }
