@@ -36,3 +36,4 @@ namespace Checkin_Platform.Core.QueryHandlers.User
             return userDtoList;
         }
     }
+}

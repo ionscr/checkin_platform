@@ -1,6 +1,8 @@
 ﻿using Checkin_Platform.Core.CommandHandlers.User;
 using Checkin_Platform.Core.Commands.User;
 using Checkin_Platform.Core.Dto;
+using Checkin_Platform.Core.Queries.User;
+using Checkin_Platform.Core.QueryHandlers.User;
 using Checkin_Platform.Infrastructure.Data;
 using System;
 using System.Linq;
@@ -27,8 +29,13 @@ namespace Checkin_Platform.Console
             };
             var commandHandler = new CreateUserCommandHandler(unitOfWork);
             commandHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
-           
-            var result = unitOfWork.User.ToList();
+            var getUsersQuery = new GetUsersQuery();
+            var queryHandler = new GetUserQueryHandler(unitOfWork);
+            var result = queryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
+            foreach(var item in result)
+            {
+
+            }
         }
     }
 }
