@@ -1,9 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.ScheduleReservation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,9 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.Feature;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +19,8 @@ namespace Checkin_Platform.Core.CommandHandlers.Feature
         {
             _unitOfWork.Feature.Add(new Domain.Feature
             {
-                Nume = request.FeatureDto.Nume
+                Nume = request.FeatureDto.Nume,
+                ClassroomFeatures = request.FeatureDto.ClassroomFeatures
             });
             return true;
         }

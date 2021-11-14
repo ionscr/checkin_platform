@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Checkin_Platform.Domain
 {
@@ -8,5 +6,7 @@ namespace Checkin_Platform.Domain
     {
         public int Id { get; set; }
         public string Nume { get; set; }
+
+        public List<ClassroomFeature> ClassroomFeatures { get; set; }
     }
 }

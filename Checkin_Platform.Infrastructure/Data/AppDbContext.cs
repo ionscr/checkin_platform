@@ -1,8 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Domain;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Checkin_Platform.Infrastructure.Data
 {

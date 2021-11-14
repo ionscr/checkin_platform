@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Checkin_Platform.Domain
+﻿namespace Checkin_Platform.Domain
 {
-   public class Class
+    public class Class
     {
         public int Id { get; set; }
         public string Name { get; set; }

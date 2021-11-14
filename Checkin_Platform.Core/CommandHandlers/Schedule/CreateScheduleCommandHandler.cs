@@ -1,9 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.Schedule;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,8 +21,9 @@ namespace Checkin_Platform.Core.CommandHandlers.Schedule
             {
                 DateTime = request.ScheduleDto.DateTime,
                 Classroom = request.ScheduleDto.Classroom,
-                Reservations = request.ScheduleDto.Reservations,
+                ScheduleReservations = request.ScheduleDto.ScheduleReservations,
                 Classn = request.ScheduleDto.Classn
+                
             });
             return true;
         }

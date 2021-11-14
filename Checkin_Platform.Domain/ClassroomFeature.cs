@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Checkin_Platform.Domain
+﻿namespace Checkin_Platform.Domain
 {
     public class ClassroomFeature
     {

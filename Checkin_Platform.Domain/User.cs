@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Checkin_Platform.Domain
 {
@@ -14,5 +12,6 @@ namespace Checkin_Platform.Domain
         public string Department { get; set; }
         public string Group { get; set; }
 
+        public List<ScheduleReservation> ScheduleReservations { get; set; }
     }
 }

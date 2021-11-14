@@ -27,6 +27,7 @@ namespace Checkin_Platform.Console
             };
             var commandHandler = new CreateUserCommandHandler(unitOfWork);
             commandHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
+           
             var result = unitOfWork.User.ToList();
         }
     }

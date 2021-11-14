@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Checkin_Platform.Domain;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Checkin_Platform.Core.Dto
 {
@@ -12,5 +11,6 @@ namespace Checkin_Platform.Core.Dto
         public int Year { get; set; }
         public string Department { get; set; }
         public string Group { get; set; }
+        public List<ScheduleReservation> ScheduleReservations { get; set; }      
     }
 }
