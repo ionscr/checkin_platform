@@ -32,10 +32,7 @@ namespace Checkin_Platform.Console
             var getUsersQuery = new GetUsersQuery();
             var queryHandler = new GetUserQueryHandler(unitOfWork);
             var result = queryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
-            foreach(var item in result)
-            {
-
-            }
+            System.Console.WriteLine(result);
         }
     }
 }

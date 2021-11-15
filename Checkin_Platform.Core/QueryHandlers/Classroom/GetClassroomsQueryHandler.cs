@@ -27,7 +27,6 @@ namespace Checkin_Platform.Core.QueryHandlers.Classroom
                 {
                     Name = item.Name,
                     Capacity = item.Capacity,
-                    ClassroomFeatures = item.ClassroomFeatures,
                     Location = item.Location
                 });
             }

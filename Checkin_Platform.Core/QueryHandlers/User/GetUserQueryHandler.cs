@@ -29,8 +29,7 @@ namespace Checkin_Platform.Core.QueryHandlers.User
                     Role = item.Role,
                     Department = item.Department,
                     Group = item.Group,
-                    Year = item.Year,
-                    ScheduleReservations = item.ScheduleReservations
+                    Year = item.Year
                 });
             }
             return userDtoList;

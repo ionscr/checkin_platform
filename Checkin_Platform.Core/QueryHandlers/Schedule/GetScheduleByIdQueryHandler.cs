@@ -25,7 +25,6 @@ namespace Checkin_Platform.Core.QueryHandlers.Schedule
                 scheduleDto.Classn = item.Classn;
                 scheduleDto.Classroom = item.Classroom;
                 scheduleDto.DateTime = item.DateTime;
-                scheduleDto.ScheduleReservations = item.ScheduleReservations;
               
             }
             return scheduleDto;

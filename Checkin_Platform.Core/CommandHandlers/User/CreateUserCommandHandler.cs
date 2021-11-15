@@ -25,7 +25,6 @@ namespace Checkin_Platform.Core.CommandHandlers.User
                 Department = request.UserDto.Department,
                 Group = request.UserDto.Group,
                 Year = request.UserDto.Year,
-                ScheduleReservations = request.UserDto.ScheduleReservations
                 
             }) ;
             return true;

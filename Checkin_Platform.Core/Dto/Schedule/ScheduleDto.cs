@@ -1,6 +1,5 @@
-﻿using Checkin_Platform.Domain;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Checkin_Platform.Domain;
 
 namespace Checkin_Platform.Core.Dto
 {
@@ -9,6 +8,5 @@ namespace Checkin_Platform.Core.Dto
         public DateTime DateTime { get; set; }
         public Classroom Classroom { get; set; }
         public Class Classn { get; set; }
-        public List<ScheduleReservation> ScheduleReservations { get; set; }
     }
 }

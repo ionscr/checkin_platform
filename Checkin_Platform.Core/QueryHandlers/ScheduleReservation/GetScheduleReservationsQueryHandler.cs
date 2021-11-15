@@ -25,9 +25,7 @@ namespace Checkin_Platform.Core.QueryHandlers.ScheduleReservation
                 scheduleReservationDtoList.Add(new ScheduleReservationDto
                 {
                     Schedule = item.Schedule,
-                    Student = item.Student,
-                    ScheduleId = item.ScheduleId,
-                    StudentId = item.StudentId
+                    Student = item.Student
                 });
             }
             return scheduleReservationDtoList;

@@ -20,9 +20,7 @@ namespace Checkin_Platform.Core.CommandHandlers.ScheduleReservation
             _unitOfWork.ScheduleReservation.Add(new Domain.ScheduleReservation
             {
                 Schedule = request.ScheduleReservationDto.Schedule,
-                ScheduleId = request.ScheduleReservationDto.ScheduleId,
-                Student = request.ScheduleReservationDto.Student,
-                StudentId = request.ScheduleReservationDto.StudentId
+                Student = request.ScheduleReservationDto.Student
             });
             return true;
         }

@@ -24,8 +24,7 @@ namespace Checkin_Platform.Core.QueryHandlers.Feature
             {
                 featureDtoList.Add(new FeatureDto
                 {
-                    Nume = item.Nume,
-                    ClassroomFeatures = item.ClassroomFeatures
+                    Name = item.Name
                 });
             }
             return featureDtoList;

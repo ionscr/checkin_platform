@@ -21,7 +21,6 @@ namespace Checkin_Platform.Core.CommandHandlers.Schedule
             {
                 DateTime = request.ScheduleDto.DateTime,
                 Classroom = request.ScheduleDto.Classroom,
-                ScheduleReservations = request.ScheduleDto.ScheduleReservations,
                 Classn = request.ScheduleDto.Classn
                 
             });

@@ -21,8 +21,7 @@ namespace Checkin_Platform.Core.CommandHandlers.Classroom
             {
                 Name = request.ClassroomDto.Name,
                 Capacity = request.ClassroomDto.Capacity,
-                Location = request.ClassroomDto.Location,
-                ClassroomFeatures = request.ClassroomDto.ClassroomFeatures
+                Location = request.ClassroomDto.Location
             });
             return true;
         }

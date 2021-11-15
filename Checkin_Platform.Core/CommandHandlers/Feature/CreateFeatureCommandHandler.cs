@@ -19,8 +19,7 @@ namespace Checkin_Platform.Core.CommandHandlers.Feature
         {
             _unitOfWork.Feature.Add(new Domain.Feature
             {
-                Nume = request.FeatureDto.Nume,
-                ClassroomFeatures = request.FeatureDto.ClassroomFeatures
+                Name = request.FeatureDto.Name
             });
             return true;
         }
