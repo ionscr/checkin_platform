@@ -9,5 +9,7 @@ namespace Checkin_Platform.Domain
         public string Location { get; set; }
         public int Capacity { get; set; }
         public List<ClassroomFeature> ClassroomFeatures { get; set; }
+
+        public List <Schedule> Schedules { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace Checkin_Platform.Core.QueryHandlers.Schedule
             {
                 scheduleDtoList.Add(new ScheduleDto
                 {
-                    Classn = item.Classn,
+                    Classn = item.Class,
                     Classroom = item.Classroom,
                     DateTime = item.DateTime
                 });

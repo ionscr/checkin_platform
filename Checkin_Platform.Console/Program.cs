@@ -13,26 +13,26 @@ namespace Checkin_Platform.Console
     {
         static void Main(string[] args)
         {
-            var userDto = new UserDto
-            {
-                FirstName = "asd",
-                LastName = "wqe",
-                Year = 1,
-                Role = 1,
-                Department = "dpasd",
-                Group = "aa12",
-            };
-            var unitOfWork = new AppDbContext();
-            var createUserCommand = new CreateUserCommand()
-            {
-                UserDto = userDto
-            };
-            var commandHandler = new CreateUserCommandHandler(unitOfWork);
-            commandHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
-            var getUsersQuery = new GetUsersQuery();
-            var queryHandler = new GetUserQueryHandler(unitOfWork);
-            var result = queryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
-            System.Console.WriteLine(result);
+            //var userDto = new UserDto
+            //{
+            //    FirstName = "asd",
+            //    LastName = "wqe",
+            //    Year = 1,
+            //    Role = 1,
+            //    Department = "dpasd",
+            //    Group = "aa12",
+            //};
+            //var unitOfWork = new AppDbContext();
+            //var createUserCommand = new CreateUserCommand()
+            //{
+            //    UserDto = userDto
+            //};
+            //var commandHandler = new CreateUserCommandHandler(unitOfWork);
+            //commandHandler.Handle(createUserCommand, new System.Threading.CancellationToken()).Wait();
+            //var getUsersQuery = new GetUsersQuery();
+            //var queryHandler = new GetUserQueryHandler(unitOfWork);
+            //var result = queryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
+            //System.Console.WriteLine(result);
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Checkin_Platform.Core.QueryHandlers.Schedule
         }
         public async Task<ScheduleDto> Handle(GetScheduleByIdQuery request, CancellationToken cancellationToken)
         {
-            var schedule = _unitOfWork.Schedule.Where(s => s.Id == request.Id);
+            var schedule = _unitOfWork.Schedule.ToList();
             var scheduleDto = new ScheduleDto();
             foreach (var item in schedule)
             {
 
-                scheduleDto.Classn = item.Classn;
+                scheduleDto.Classn = item.Class;
                 scheduleDto.Classroom = item.Classroom;
                 scheduleDto.DateTime = item.DateTime;
               

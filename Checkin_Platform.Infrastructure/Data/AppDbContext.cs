@@ -1,18 +1,46 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Domain;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Checkin_Platform.Infrastructure.Data
 {
-    public class AppDbContext : IUnitOfWork
+    public class AppDbContext : DbContext ,IUnitOfWork
     {
-        public IList<User> User { get; set; } = new List<User>();
-        public IList<Class> Class { get; set; } = new List<Class>();
-        public IList<Classroom> Classroom { get; set; } = new List<Classroom>();
-        public IList<Feature> Feature { get; set; } = new List<Feature>();
-        public IList<Schedule> Schedule { get; set; } = new List<Schedule>();
-        public IList<ClassroomFeature> ClassroomFeature { get; set; } = new List<ClassroomFeature>();
-        public IList<ScheduleReservation> ScheduleReservation { get; set; } = new List<ScheduleReservation>();
-        
+        public AppDbContext()
+        {
+
+        }
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions){}
+        public DbSet<User> User { get; set; }
+        public DbSet<Class> Class { get; set; }
+        public DbSet<Classroom> Classroom { get; set; }
+        public DbSet<Feature> Feature { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
+        public DbSet<ClassroomFeature> ClassroomFeature { get; set; } 
+        public DbSet<ScheduleReservation> ScheduleReservation { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=CheckinPlatform;Trusted_Connection=True;");
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ScheduleReservation>()
+                .HasOne(t => t.Schedule)
+                .WithMany(t => t.ScheduleReservations)
+                .HasForeignKey(t => t.ScheduleId)
+                .OnDelete(DeleteBehavior.Restrict); 
+
+            modelBuilder.Entity<ScheduleReservation>()
+                .HasOne(t => t.User)
+                .WithMany(t => t.ScheduleReservations)
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }
