@@ -1,9 +1,6 @@
 ﻿using Checkin_Platform.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Checkin_Platform.Infrastructure.Data.Configurations
 {
@@ -11,7 +8,17 @@ namespace Checkin_Platform.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ScheduleReservation> builder)
         {
-            //builder.Entity<Schedule>()
+            builder
+            .HasOne(t => t.Schedule) 
+            .WithMany(t => t.ScheduleReservations)
+            .HasForeignKey(t => t.ScheduleId)  
+            .OnDelete(DeleteBehavior.Restrict);
+            
+            builder
+            .HasOne(t => t.User)
+            .WithMany(t => t.ScheduleReservations)
+            .HasForeignKey(t => t.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

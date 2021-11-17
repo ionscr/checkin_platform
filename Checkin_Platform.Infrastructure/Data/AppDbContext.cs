@@ -1,5 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Domain;
+using Checkin_Platform.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Checkin_Platform.Infrastructure.Data
@@ -29,18 +30,7 @@ namespace Checkin_Platform.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<ScheduleReservation>()
-                .HasOne(t => t.Schedule)
-                .WithMany(t => t.ScheduleReservations)
-                .HasForeignKey(t => t.ScheduleId)
-                .OnDelete(DeleteBehavior.Restrict); 
-
-            modelBuilder.Entity<ScheduleReservation>()
-                .HasOne(t => t.User)
-                .WithMany(t => t.ScheduleReservations)
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.ApplyConfiguration(new ScheduleReservationConfiguration());
         }
     }
 }
