@@ -1,6 +1,6 @@
 ﻿namespace Checkin_Platform.Domain
 {
-    public class ScheduleReservation
+    public class UserSchedule
     {
         public int Id { get; set; }
         public Schedule Schedule { get; set; }

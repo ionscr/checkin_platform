@@ -17,14 +17,16 @@ namespace Checkin_Platform.Core.CommandHandlers.ClassroomFeature
 
         public async Task<bool> Handle(CreateClassroomFeatureCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ClassroomFeature.Add(new Domain.ClassroomFeature
+            _unitOfWork.ClassroomFeatureRepository.AddClassroomFeature(new Domain.ClassroomFeature
             {
                 Classroom = request.ClassroomFeatureDto.Classroom,
                 Feature = request.ClassroomFeatureDto.Feature,
                 ClassroomId = request.ClassroomFeatureDto.ClassroomId,
                 FeatureId = request.ClassroomFeatureDto.FeatureId
             });
+            _unitOfWork.SaveChanges();
             return true;
+
         }
     }
 }

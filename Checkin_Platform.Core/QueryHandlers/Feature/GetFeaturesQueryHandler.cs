@@ -18,7 +18,7 @@ namespace Checkin_Platform.Core.QueryHandlers.Feature
         }
         public async Task<IEnumerable<FeatureDto>> Handle(GetFeaturesQuery request, CancellationToken cancellationToken)
         {
-            var featureList = _unitOfWork.Feature.ToList();
+            var featureList = _unitOfWork.FeatureRepository.GetFeatures();
             var featureDtoList = new List<FeatureDto>();
             foreach (var item in featureList)
             {

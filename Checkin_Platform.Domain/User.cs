@@ -12,7 +12,7 @@ namespace Checkin_Platform.Domain
         public string? Department { get; set; }
         public string? Group { get; set; }
 
-        public List<ScheduleReservation> ScheduleReservations { get; set; }
+        public List<UserSchedule> UserSchedule { get; set; }
         public List<Class>? Classes { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Checkin_Platform.Core.QueryHandlers.User
         }
         public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var userList = _unitOfWork.User.ToList();
+            var userList = _unitOfWork.UserRepository.GetUsers();
             var userDtoList = new List<UserDto>();
             foreach (var item in userList)
             {

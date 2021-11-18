@@ -17,10 +17,11 @@ namespace Checkin_Platform.Core.CommandHandlers.Feature
 
         public async Task<bool> Handle(CreateFeatureCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.Feature.Add(new Domain.Feature
+            _unitOfWork.FeatureRepository.AddFeature(new Domain.Feature
             {
                 Name = request.FeatureDto.Name
             });
+            _unitOfWork.SaveChanges();
             return true;
         }
 

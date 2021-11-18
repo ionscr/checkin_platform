@@ -18,13 +18,14 @@ namespace Checkin_Platform.Core.CommandHandlers
 
         public async Task<bool> Handle(CreateClassCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.Class.Add(new Class
+            _unitOfWork.ClassRepository.AddClass(new Class
             {
                 Name = request.ClassDto.Name,
                 Section = request.ClassDto.Section,
                 Teacher = request.ClassDto.Teacher,
                 Year = request.ClassDto.Year
             });
+            _unitOfWork.SaveChanges();
             return true;
         }
     }

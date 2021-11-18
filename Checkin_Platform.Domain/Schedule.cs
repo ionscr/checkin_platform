@@ -11,6 +11,6 @@ namespace Checkin_Platform.Domain
         public Class Class { get; set; }
         public int ClassId { get; set; }
         public int ClassroomId { get; set; }
-        public List<ScheduleReservation> ScheduleReservations { get; set; }
+        public List<UserSchedule> UserSchedule { get; set; }
     }
 }

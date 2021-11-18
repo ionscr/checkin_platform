@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Checkin_Platform.Infrastructure.Data
 {
-    public class AppDbContext : DbContext ,IUnitOfWork
+    public class AppDbContext : DbContext
     {
         public AppDbContext()
         {
@@ -18,7 +18,7 @@ namespace Checkin_Platform.Infrastructure.Data
         public DbSet<Feature> Feature { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<ClassroomFeature> ClassroomFeature { get; set; } 
-        public DbSet<ScheduleReservation> ScheduleReservation { get; set; }
+        public DbSet<UserSchedule> UserSchedule { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +30,7 @@ namespace Checkin_Platform.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new ScheduleReservationConfiguration());
+            modelBuilder.ApplyConfiguration(new UserScheduleConfiguration());
         }
     }
 }

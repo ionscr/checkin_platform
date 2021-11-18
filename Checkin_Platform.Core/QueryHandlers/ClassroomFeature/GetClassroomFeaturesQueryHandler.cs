@@ -18,7 +18,7 @@ namespace Checkin_Platform.Core.QueryHandlers.ClassroomFeature
         }
         public async Task<IEnumerable<ClassroomFeatureDto>> Handle(GetClassroomFeaturesQuery request, CancellationToken cancellationToken)
         {
-            var classroomFeatureList = _unitOfWork.ClassroomFeature.ToList();
+            var classroomFeatureList = _unitOfWork.ClassroomFeatureRepository.GetClassroomFeatures();
             var classroomFeatureDtoList = new List<ClassroomFeatureDto>();
             foreach (var item in classroomFeatureList)
             {

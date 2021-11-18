@@ -3,7 +3,6 @@ using Checkin_Platform.Core.Dto;
 using Checkin_Platform.Core.Queries.Classroom;
 using MediatR;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +18,7 @@ namespace Checkin_Platform.Core.QueryHandlers.Classroom
 
         public async Task<IEnumerable<ClassroomDto>> Handle(GetClassroomsQuery request, CancellationToken cancellationToken)
         {
-            var classroomList = _unitOfWork.Classroom.ToList();
+            var classroomList = _unitOfWork.ClassroomRepository.GetClassrooms();
             var classroomDtoList = new List<ClassroomDto>();
             foreach (var item in classroomList)
             {

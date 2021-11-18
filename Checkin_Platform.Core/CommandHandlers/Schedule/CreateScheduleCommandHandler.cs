@@ -17,13 +17,13 @@ namespace Checkin_Platform.Core.CommandHandlers.Schedule
 
         public async Task<bool> Handle(CreateScheduleCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.Schedule.Add(new Domain.Schedule
+            _unitOfWork.ScheduleRepository.AddSchedule(new Domain.Schedule
             {
                 DateTime = request.ScheduleDto.DateTime,
                 Classroom = request.ScheduleDto.Classroom,
                 Class = request.ScheduleDto.Classn
-                
             });
+            _unitOfWork.SaveChanges();
             return true;
         }
     }

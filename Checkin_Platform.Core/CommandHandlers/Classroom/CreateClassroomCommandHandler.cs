@@ -17,12 +17,13 @@ namespace Checkin_Platform.Core.CommandHandlers.Classroom
 
         public async Task<bool> Handle(CreateClassroomCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.Classroom.Add(new Domain.Classroom
+            _unitOfWork.ClassroomRepository.AddClassroom(new Domain.Classroom
             {
                 Name = request.ClassroomDto.Name,
                 Capacity = request.ClassroomDto.Capacity,
                 Location = request.ClassroomDto.Location
             });
+            _unitOfWork.SaveChanges();
             return true;
         }
     }

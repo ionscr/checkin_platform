@@ -18,7 +18,7 @@ namespace Checkin_Platform.Core.QueryHandlers.Schedule
         }
         public async Task<IEnumerable<ScheduleDto>> Handle(GetSchedulesByDateQuery request, CancellationToken cancellationToken)
         {
-            var scheduleList = _unitOfWork.Schedule.Where(s => s.DateTime.Date == request.DateTime.Date );
+            var scheduleList = _unitOfWork.ScheduleRepository.GetSchedules().Where(s => s.DateTime.Date == request.DateTime.Date );
             var scheduleDtoList = new List<ScheduleDto>();
             foreach (var item in scheduleList)
             {

@@ -17,7 +17,7 @@ namespace Checkin_Platform.Core.CommandHandlers.User
 
         public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.User.Add(new Domain.User
+            _unitOfWork.UserRepository.AddUser(new Domain.User
             {
                 FirstName = request.UserDto.FirstName,
                 LastName = request.UserDto.LastName,
@@ -27,6 +27,7 @@ namespace Checkin_Platform.Core.CommandHandlers.User
                 Year = request.UserDto.Year,
                 
             }) ;
+            _unitOfWork.SaveChanges();
             return true;
         }
     }
