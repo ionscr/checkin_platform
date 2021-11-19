@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.User
 {
-    public class GetUserQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>>
     {
         private IUnitOfWork _unitOfWork;
-        public GetUserQueryHandler(IUnitOfWork unitOfWork)
+        public GetUsersQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
