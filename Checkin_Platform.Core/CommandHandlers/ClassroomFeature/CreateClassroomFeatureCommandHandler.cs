@@ -20,9 +20,7 @@ namespace Checkin_Platform.Core.CommandHandlers.ClassroomFeature
             _unitOfWork.ClassroomFeatureRepository.AddClassroomFeature(new Domain.ClassroomFeature
             {
                 Classroom = request.ClassroomFeatureDto.Classroom,
-                Feature = request.ClassroomFeatureDto.Feature,
-                ClassroomId = request.ClassroomFeatureDto.ClassroomId,
-                FeatureId = request.ClassroomFeatureDto.FeatureId
+                Feature = request.ClassroomFeatureDto.Feature
             });
             _unitOfWork.SaveChanges();
             return true;

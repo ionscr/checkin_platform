@@ -5,6 +5,6 @@ namespace Checkin_Platform.Core.Commands.Schedule
 {
     public class CreateScheduleCommand: IRequest<bool>
     {
-        public ScheduleDto ScheduleDto { get; set; }
+        public SetScheduleDto ScheduleDto { get; set; }
     }
 }

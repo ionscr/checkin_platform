@@ -9,23 +9,24 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.UserSchedule
 {
-    public class GetUserSchedulesQueryHandler : IRequestHandler<GetUserSchedulesQuery, IEnumerable<UserScheduleDto>>
+    public class GetUserSchedulesQueryHandler : IRequestHandler<GetUserSchedulesQuery, IEnumerable<GetUserScheduleDto>>
     {
         private IUnitOfWork _unitOfWork;
         public GetUserSchedulesQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<UserScheduleDto>> Handle(GetUserSchedulesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetUserScheduleDto>> Handle(GetUserSchedulesQuery request, CancellationToken cancellationToken)
         {
             var userScheduleList = _unitOfWork.UserScheduleRepository.GetUserSchedules();
-            var userScheduleDtoList = new List<UserScheduleDto>();
+            var userScheduleDtoList = new List<GetUserScheduleDto>();
             foreach (var item in userScheduleList)
             {
-                userScheduleDtoList.Add(new UserScheduleDto
+                userScheduleDtoList.Add(new GetUserScheduleDto
                 {
+                    Id = item.Id,
                     Schedule = item.Schedule,
-                    Student = item.User
+                    User = item.User
                 });
             }
             return userScheduleDtoList;

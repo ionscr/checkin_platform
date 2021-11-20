@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Queries.UserSchedule
 {
-    public class GetUserSchedulesQuery : IRequest<IEnumerable<UserScheduleDto>>
+    public class GetUserSchedulesQuery : IRequest<IEnumerable<GetUserScheduleDto>>
     {
     }
 }

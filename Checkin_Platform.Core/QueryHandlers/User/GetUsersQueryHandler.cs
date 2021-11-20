@@ -9,21 +9,22 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.User
 {
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<UserDto>>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<GetUserDto>>
     {
         private IUnitOfWork _unitOfWork;
         public GetUsersQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetUserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var userList = _unitOfWork.UserRepository.GetUsers();
-            var userDtoList = new List<UserDto>();
+            var userDtoList = new List<GetUserDto>();
             foreach (var item in userList)
             {
-                userDtoList.Add(new UserDto
+                userDtoList.Add(new GetUserDto
                 {
+                    Id = item.Id,
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Role = item.Role,

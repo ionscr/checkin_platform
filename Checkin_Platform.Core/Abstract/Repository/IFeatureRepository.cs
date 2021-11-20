@@ -7,5 +7,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
     {
         IQueryable<Feature> GetFeatures();
         void AddFeature(Feature feature);
+        Feature GetFeatureById(int id);
+        void DeleteFeature(Feature feature);
     }
 }

@@ -9,21 +9,22 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.Feature
 {
-    public class GetFeaturesQueryHandler : IRequestHandler<GetFeaturesQuery, IEnumerable<FeatureDto>>
+    public class GetFeaturesQueryHandler : IRequestHandler<GetFeaturesQuery, IEnumerable<GetFeatureDto>>
     {
         private IUnitOfWork _unitOfWork;
         public GetFeaturesQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<FeatureDto>> Handle(GetFeaturesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetFeatureDto>> Handle(GetFeaturesQuery request, CancellationToken cancellationToken)
         {
             var featureList = _unitOfWork.FeatureRepository.GetFeatures();
-            var featureDtoList = new List<FeatureDto>();
+            var featureDtoList = new List<GetFeatureDto>();
             foreach (var item in featureList)
             {
-                featureDtoList.Add(new FeatureDto
+                featureDtoList.Add(new GetFeatureDto
                 {
+                    Id = item.Id,
                     Name = item.Name
                 });
             }

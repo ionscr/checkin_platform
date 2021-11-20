@@ -20,7 +20,7 @@ namespace Checkin_Platform.Core.CommandHandlers.UserSchedule
             _unitOfWork.UserScheduleRepository.AddUserSchedule(new Domain.UserSchedule
             {
                 Schedule = request.UserScheduleDto.Schedule,
-                User = request.UserScheduleDto.Student
+                User = request.UserScheduleDto.User
             });
             _unitOfWork.SaveChanges();
             return true;

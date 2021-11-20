@@ -2,8 +2,9 @@
 
 namespace Checkin_Platform.Core.Dto
 {
-    public class FeatureDto
+    public class GetFeatureDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

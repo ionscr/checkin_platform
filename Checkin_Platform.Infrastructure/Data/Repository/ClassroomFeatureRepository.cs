@@ -20,5 +20,13 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext.ClassroomFeature.Add(classroomFeature);
         }
+        public void DeleteClassroomFeature(ClassroomFeature classroomFeature)
+        {
+            _appDbContext.ClassroomFeature.Remove(classroomFeature);
+        }
+        public ClassroomFeature GetClassroomFeatureById(int id)
+        {
+            return _appDbContext.ClassroomFeature.FirstOrDefault(c => c.Id == id);
+        }
     }
 }

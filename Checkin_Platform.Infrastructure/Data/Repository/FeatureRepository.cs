@@ -20,5 +20,13 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext.Feature.Add(feature);
         }
+        public void DeleteFeature(Feature feature)
+        {
+            _appDbContext.Feature.Remove(feature);
+        }
+        public Feature GetFeatureById(int id)
+        {
+            return _appDbContext.Feature.FirstOrDefault(c => c.Id == id);
+        }
     }
 }

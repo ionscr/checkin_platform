@@ -7,5 +7,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
     {
         IQueryable<UserSchedule> GetUserSchedules();
         void AddUserSchedule(UserSchedule userSchedule);
+        UserSchedule GetUserScheduleById(int id);
+        void DeleteUserSchedule(UserSchedule userSchedule);
     }
 }

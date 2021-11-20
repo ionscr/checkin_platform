@@ -2,9 +2,10 @@
 
 namespace Checkin_Platform.Core.Dto
 {
-    public class UserScheduleDto
+    public class GetUserScheduleDto
     {
+        public int Id { get; set; }
         public Schedule Schedule { get; set; }
-        public User Student { get; set; }
+        public User User { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Queries.Schedule
 {
-    public class GetSchedulesByDateQuery: IRequest<IEnumerable<ScheduleDto>>
+    public class GetSchedulesByDateQuery: IRequest<IEnumerable<GetScheduleDto>>
     {
         public DateTime DateTime { get; set; }
     }

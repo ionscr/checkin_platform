@@ -20,5 +20,13 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext.Schedule.Add(schedule);
         }
+        public void DeleteSchedule(Schedule schedule)
+        {
+            _appDbContext.Schedule.Remove(schedule);
+        }
+        public Schedule GetScheduleById(int id)
+        {
+            return _appDbContext.Schedule.FirstOrDefault(c => c.Id == id);
+        }
     }
 }

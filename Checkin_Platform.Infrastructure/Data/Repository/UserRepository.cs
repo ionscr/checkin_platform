@@ -20,5 +20,13 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext.User.Add(user);
         }
+        public void DeleteUser(User user)
+        {
+            _appDbContext.User.Remove(user);
+        }
+        public User GetUserById(int id)
+        {
+            return _appDbContext.User.FirstOrDefault(c => c.Id == id);
+        }
     }
 }

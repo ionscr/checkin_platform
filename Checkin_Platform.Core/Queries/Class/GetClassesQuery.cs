@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Queries.Class
 {
-    public class GetClassesQuery: IRequest<IEnumerable<ClassDto>>
+    public class GetClassesQuery: IRequest<IEnumerable<GetClassDto>>
     {
 
     }

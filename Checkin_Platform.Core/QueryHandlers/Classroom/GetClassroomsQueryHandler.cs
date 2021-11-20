@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.Classroom
 {
-    class GetClassroomsQueryHandler: IRequestHandler<GetClassroomsQuery, IEnumerable<ClassroomDto>>
+    public class GetClassroomsQueryHandler: IRequestHandler<GetClassroomsQuery, IEnumerable<GetClassroomDto>>
     {
         private IUnitOfWork _unitOfWork;
         public GetClassroomsQueryHandler(IUnitOfWork unitOfWork)
@@ -16,14 +16,15 @@ namespace Checkin_Platform.Core.QueryHandlers.Classroom
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<ClassroomDto>> Handle(GetClassroomsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetClassroomDto>> Handle(GetClassroomsQuery request, CancellationToken cancellationToken)
         {
             var classroomList = _unitOfWork.ClassroomRepository.GetClassrooms();
-            var classroomDtoList = new List<ClassroomDto>();
+            var classroomDtoList = new List<GetClassroomDto>();
             foreach (var item in classroomList)
             {
-                classroomDtoList.Add(new ClassroomDto
+                classroomDtoList.Add(new GetClassroomDto
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     Capacity = item.Capacity,
                     Location = item.Location

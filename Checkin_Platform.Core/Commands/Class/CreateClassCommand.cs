@@ -5,6 +5,6 @@ namespace Checkin_Platform.Core.Commands.Class
 {
     public class CreateClassCommand: IRequest<bool>
     {
-        public ClassDto ClassDto { get; set; }
+        public SetClassDto ClassDto { get; set; }
     }
 }

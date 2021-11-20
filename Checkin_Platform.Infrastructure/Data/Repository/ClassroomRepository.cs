@@ -20,5 +20,13 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext.Classroom.Add(classroom);
         }
+        public void DeleteClassroom(Classroom classroom)
+        {
+            _appDbContext.Classroom.Remove(classroom);
+        }
+        public Classroom GetClassroomById(int id)
+        {
+            return _appDbContext.Classroom.FirstOrDefault(c => c.Id == id);
+        }
     }
 }

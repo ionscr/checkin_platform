@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Queries.Feature
 {
-    public class GetFeaturesQuery : IRequest<IEnumerable<FeatureDto>>
+    public class GetFeaturesQuery : IRequest<IEnumerable<GetFeatureDto>>
     {
     }
 }
