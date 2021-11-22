@@ -2,23 +2,24 @@
 using Checkin_Platform.Core.Dto;
 using Checkin_Platform.Core.Queries.Schedule;
 using MediatR;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.QueryHandlers.Schedule
 {
-    public class GetSchedulesByDateQueryHandler : IRequestHandler<GetSchedulesByDateQuery, IEnumerable<GetScheduleDto>>
+    public class GetSchedulesByUserReservationsQueryHandler : IRequestHandler<GetSchedulesByUserReservationsQuery, IEnumerable<GetScheduleDto>>
     {
         private IUnitOfWork _unitOfWork;
-        public GetSchedulesByDateQueryHandler(IUnitOfWork unitOfWork)
+        public GetSchedulesByUserReservationsQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<GetScheduleDto>> Handle(GetSchedulesByDateQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetScheduleDto>> Handle(GetSchedulesByUserReservationsQuery request, CancellationToken cancellationToken)
         {
-            var scheduleList = _unitOfWork.ScheduleRepository.GetSchedulesByDate(request.DateTime);
+            var scheduleList = _unitOfWork.ScheduleRepository.GetSchedulesByUserReservations(request.UserId);
             var scheduleDtoList = new List<GetScheduleDto>();
             foreach (var item in scheduleList)
             {

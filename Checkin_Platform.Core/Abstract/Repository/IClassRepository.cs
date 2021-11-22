@@ -8,6 +8,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IQueryable<Class> GetClasses();
         void AddClass(Class classToAdd);
         Class GetClassById(int id);
+        Class UpdateClass(Class Class);
         void DeleteClass(Class classToDelete);
     }
 }

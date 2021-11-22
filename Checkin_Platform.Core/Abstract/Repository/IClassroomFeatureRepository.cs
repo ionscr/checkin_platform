@@ -9,5 +9,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         void AddClassroomFeature(ClassroomFeature classroomFeature);
         ClassroomFeature GetClassroomFeatureById(int id);
         void DeleteClassroomFeature(ClassroomFeature classroomFeature);
+        
     }
 }

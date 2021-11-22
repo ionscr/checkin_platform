@@ -9,5 +9,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         void AddFeature(Feature feature);
         Feature GetFeatureById(int id);
         void DeleteFeature(Feature feature);
+        IQueryable<Feature> GetFeaturesByClassroom(int classroomId);
+        Feature UpdateFeature(Feature feature);
     }
 }

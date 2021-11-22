@@ -28,14 +28,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Class.FirstOrDefault(c => c.Id == id);
         }
-        public void UpdateClass(Class class_to_update)
+        public Class UpdateClass(Class Class)
         {
-            var selectedClass = _appDbContext.Class.Find(class_to_update.Id);
-            selectedClass.Name = class_to_update.Name;
-            selectedClass.Schedules = class_to_update.Schedules;
-            selectedClass.Section = class_to_update.Section;
-            selectedClass.Teacher = class_to_update.Teacher;
-            selectedClass.Year = class_to_update.Year;
+            Class updatedClass = _appDbContext.Class.FirstOrDefault(c => c.Id == Class.Id);
+            updatedClass = Class;
+            return updatedClass;
         }
     }
 }

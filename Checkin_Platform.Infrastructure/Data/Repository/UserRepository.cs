@@ -28,5 +28,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.User.FirstOrDefault(c => c.Id == id);
         }
+        public User UpdateUser(User user)
+        {
+            User updatedUser = _appDbContext.User.FirstOrDefault(c => c.Id == user.Id);
+            updatedUser = user;
+            return updatedUser;
+        }
     }
 }

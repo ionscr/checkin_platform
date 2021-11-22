@@ -67,20 +67,20 @@ namespace Checkin_Platform.Console
             }
 
             //-------------- delete
-            var deleteUserCommand = new DeleteUserCommand()
-            {
-                //Id = unitOfWork.UserRepository.GetUsers().OrderByDescending(c => c.Id).FirstOrDefault().Id
-                //Id = 200
-                Id = 1
-            };
-            var deleteUserHandler = new DeleteUserCommandHandler(unitOfWork);
-            deleteUserHandler.Handle(deleteUserCommand, new System.Threading.CancellationToken()).Wait();
-            System.Console.WriteLine();
-            userResult = userQueryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
-            foreach (var item in userResult.Result.ToList())
-            {
-                System.Console.WriteLine($"{item.Id} {item.FirstName} {item.LastName}");
-            }
+            //var deleteUserCommand = new DeleteUserCommand()
+            //{
+            //    //Id = unitOfWork.UserRepository.GetUsers().OrderByDescending(c => c.Id).FirstOrDefault().Id
+            //    //Id = 200
+            //    Id = 1
+            //};
+            //var deleteUserHandler = new DeleteUserCommandHandler(unitOfWork);
+            //deleteUserHandler.Handle(deleteUserCommand, new System.Threading.CancellationToken()).Wait();
+            //System.Console.WriteLine();
+            //userResult = userQueryHandler.Handle(getUsersQuery, new System.Threading.CancellationToken());
+            //foreach (var item in userResult.Result.ToList())
+            //{
+            //    System.Console.WriteLine($"{item.Id} {item.FirstName} {item.LastName}");
+            //}
 
         }
         public static void checkClasses(UnitOfWork unitOfWork)
@@ -101,7 +101,7 @@ namespace Checkin_Platform.Console
                 ClassDto = classDto1
             };
             var classCommandHandler = new CreateClassCommandHandler(unitOfWork);
-            //classCommandHandler.Handle(createClassCommand1, new System.Threading.CancellationToken()).Wait();
+            classCommandHandler.Handle(createClassCommand1, new System.Threading.CancellationToken()).Wait();
 
             //------------------get
             var getClassesQuery = new GetClassesQuery();
@@ -109,15 +109,35 @@ namespace Checkin_Platform.Console
             var classResult = classQueryHandler.Handle(getClassesQuery, new System.Threading.CancellationToken());
             foreach (var item in classResult.Result.ToList())
             {
-                System.Console.WriteLine(item.Name + " " + item.Section + " " + item.Year + " " + item.Teacher.FirstName);
+                System.Console.WriteLine(item.Id + " " + item.Name + " " + item.Section + " " + item.Year + " " + item.Teacher.FirstName);
+            }
+
+            //-----------------update
+            var class1 = unitOfWork.ClassRepository.GetClassById(12);
+            var updatedDto = new GetClassDto()
+            {
+                Id = class1.Id,
+                Name = class1.Name + " Updated",
+                Section = class1.Section + " Updated",
+                Teacher = class1.Teacher,
+                Year = class1.Year
+            };
+            var updateClassCommand = new UpdateClassCommand() { ClassDto = updatedDto };
+            var updateClassCommandHandler = new UpdateClassCommandHandler(unitOfWork);
+            updateClassCommandHandler.Handle(updateClassCommand, new System.Threading.CancellationToken());
+            System.Console.WriteLine();
+            classResult = classQueryHandler.Handle(getClassesQuery, new System.Threading.CancellationToken());
+            foreach (var item in classResult.Result.ToList())
+            {
+                System.Console.WriteLine(item.Id + " " + item.Name + " " + item.Section + " " + item.Year + " " + item.Teacher.FirstName);
             }
 
             //-----------------delete
-            var deleteClassCommand = new DeleteClassCommand()
-            {
-                //Id = unitOfWork.ClassRepository.GetClasses().OrderByDescending(c => c.Id).FirstOrDefault().Id
-                Id = 200
-            };
+            //var deleteClassCommand = new DeleteClassCommand()
+            //{
+            //    //Id = unitOfWork.ClassRepository.GetClasses().OrderByDescending(c => c.Id).FirstOrDefault().Id
+            //    Id = 200
+            //};
 
             //var deleteClassHandler = new DeleteClassCommandHandler(unitOfWork);
             //deleteClassHandler.Handle(deleteClassCommand, new System.Threading.CancellationToken()).Wait();
@@ -232,7 +252,7 @@ namespace Checkin_Platform.Console
                 FeatureDto = featureDto1
             };
             var featureCommandHandler = new CreateFeatureCommandHandler(unitOfWork);
-            featureCommandHandler.Handle(createFeatureCommand1, new System.Threading.CancellationToken()).Wait();
+            //featureCommandHandler.Handle(createFeatureCommand1, new System.Threading.CancellationToken()).Wait();
 
             //------------------get
             var getFeaturesQuery = new GetFeaturesQuery();
@@ -242,22 +262,29 @@ namespace Checkin_Platform.Console
             {
                 System.Console.WriteLine($"{item.Id} {item.Name}");
             }
-
-            //-----------------delete
-            var deleteFeatureCommand = new DeleteFeatureCommand()
-            {
-                Id = unitOfWork.FeatureRepository.GetFeatures().OrderByDescending(c => c.Id).FirstOrDefault().Id
-                //Id = 200
-            };
-
-            var deleteFeatureHandler = new DeleteFeatureCommandHandler(unitOfWork);
-            deleteFeatureHandler.Handle(deleteFeatureCommand, new System.Threading.CancellationToken()).Wait();
             System.Console.WriteLine();
-            featureResult = featureQueryHandler.Handle(getFeaturesQuery, new System.Threading.CancellationToken());
-            foreach (var item in featureResult.Result.ToList())
+            var getFeaturesByClassroomQuery = new GetFeaturesByClassroomQuery() { ClassroomId = 2 };
+            var getFeaturesByClassroomQueryHandler = new GetFeaturesByClassroomQueryHandler(unitOfWork);
+            var featuresByClassroomResult = getFeaturesByClassroomQueryHandler.Handle(getFeaturesByClassroomQuery, new System.Threading.CancellationToken());
+            foreach(var item in featuresByClassroomResult.Result.ToList())
             {
                 System.Console.WriteLine($"{item.Id} {item.Name}");
             }
+            //-----------------delete
+            //var deleteFeatureCommand = new DeleteFeatureCommand()
+            //{
+            //    Id = unitOfWork.FeatureRepository.GetFeatures().OrderByDescending(c => c.Id).FirstOrDefault().Id
+            //    //Id = 200
+            //};
+
+            //var deleteFeatureHandler = new DeleteFeatureCommandHandler(unitOfWork);
+            //deleteFeatureHandler.Handle(deleteFeatureCommand, new System.Threading.CancellationToken()).Wait();
+            //System.Console.WriteLine();
+            //featureResult = featureQueryHandler.Handle(getFeaturesQuery, new System.Threading.CancellationToken());
+            //foreach (var item in featureResult.Result.ToList())
+            //{
+            //    System.Console.WriteLine($"{item.Id} {item.Name}");
+            //}
 
         }
         public static void checkSchedules(UnitOfWork unitOfWork)
@@ -277,7 +304,7 @@ namespace Checkin_Platform.Console
                 ScheduleDto = scheduleDto1
             };
             var scheduleCommandHandler = new CreateScheduleCommandHandler(unitOfWork);
-            scheduleCommandHandler.Handle(createScheduleCommand1, new System.Threading.CancellationToken()).Wait();
+            //scheduleCommandHandler.Handle(createScheduleCommand1, new System.Threading.CancellationToken()).Wait();
 
             //------------------get
             var getSchedulesQuery = new GetSchedulesQuery();
@@ -287,23 +314,54 @@ namespace Checkin_Platform.Console
             {
                 System.Console.WriteLine($"{item.Id} {item.Class.Name} {item.Classroom.Name} {item.DateTime}");
             }
-
-            //-----------------delete
-            var deleteScheduleCommand = new DeleteScheduleCommand()
-            {
-                //Id = unitOfWork.ScheduleRepository.GetSchedules().OrderByDescending(c => c.Id).FirstOrDefault().Id
-                //Id = 200
-                Id = 1
-            };
-
-            var deleteScheduleHandler = new DeleteScheduleCommandHandler(unitOfWork);
-            deleteScheduleHandler.Handle(deleteScheduleCommand, new System.Threading.CancellationToken()).Wait();
             System.Console.WriteLine();
-            scheduleResult = scheduleQueryHandler.Handle(getSchedulesQuery, new System.Threading.CancellationToken());
-            foreach (var item in scheduleResult.Result.ToList())
+            var getSchedulesByDateQuery = new GetSchedulesByDateQuery() { 
+                DateTime = new DateTime(2021, 12, 15)
+            };
+            var getSchedulesByDateQueryHandler = new GetSchedulesByDateQueryHandler(unitOfWork);
+            var schedulesByDateResult = getSchedulesByDateQueryHandler.Handle(getSchedulesByDateQuery, new System.Threading.CancellationToken());
+            foreach(var item in schedulesByDateResult.Result.ToList()) 
             {
                 System.Console.WriteLine($"{item.Id} {item.Class.Name} {item.Classroom.Name} {item.DateTime}");
             }
+            System.Console.WriteLine();
+            var getSchedulesByTeacherQuery = new GetSchedulesByTeacherQuery()
+            {
+                TeacherId = 1
+            };
+            var getSchedulesByTeacherQueryHandler = new GetSchedulesByTeacherQueryHandler(unitOfWork);
+            var schedulesByTeacherResult = getSchedulesByTeacherQueryHandler.Handle(getSchedulesByTeacherQuery, new System.Threading.CancellationToken());
+            foreach (var item in schedulesByTeacherResult.Result.ToList())
+            {
+                System.Console.WriteLine($"{item.Id} {item.Class.Name} {item.Classroom.Name} {item.DateTime}");
+            }
+            System.Console.WriteLine();
+            var getSchedulesByUserReservationsQuery = new GetSchedulesByUserReservationsQuery()
+            {
+                UserId = 1
+            };
+            var getSchedulesByUserReservationsQueryHandler = new GetSchedulesByUserReservationsQueryHandler(unitOfWork);
+            var schedulesByUserReservationsResult = getSchedulesByUserReservationsQueryHandler.Handle(getSchedulesByUserReservationsQuery, new System.Threading.CancellationToken());
+            foreach (var item in schedulesByUserReservationsResult.Result.ToList())
+            {
+                System.Console.WriteLine($"{item.Id} {item.Class.Name} {item.Classroom.Name} {item.DateTime}");
+            }
+            //-----------------delete
+            //var deleteScheduleCommand = new DeleteScheduleCommand()
+            //{
+            //    //Id = unitOfWork.ScheduleRepository.GetSchedules().OrderByDescending(c => c.Id).FirstOrDefault().Id
+            //    //Id = 200
+            //    Id = 1
+            //};
+
+            //var deleteScheduleHandler = new DeleteScheduleCommandHandler(unitOfWork);
+            //deleteScheduleHandler.Handle(deleteScheduleCommand, new System.Threading.CancellationToken()).Wait();
+            //System.Console.WriteLine();
+            //scheduleResult = scheduleQueryHandler.Handle(getSchedulesQuery, new System.Threading.CancellationToken());
+            //foreach (var item in scheduleResult.Result.ToList())
+            //{
+            //    System.Console.WriteLine($"{item.Id} {item.Class.Name} {item.Classroom.Name} {item.DateTime}");
+            //}
         }
         public static void checkUserSchedules(UnitOfWork unitOfWork)
         {
@@ -352,8 +410,8 @@ namespace Checkin_Platform.Console
         {
             var unitOfWork = new UnitOfWork(new AppDbContext());
 
-            checkUsers(unitOfWork);
-            //checkClasses(unitOfWork);
+            //checkUsers(unitOfWork);
+            checkClasses(unitOfWork);
             //checkClassrooms(unitOfWork);
             //checkFeatures(unitOfWork);
             //checkSchedules(unitOfWork);

@@ -1,5 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -27,6 +28,16 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         public Feature GetFeatureById(int id)
         {
             return _appDbContext.Feature.FirstOrDefault(c => c.Id == id);
+        }
+        public IQueryable<Feature> GetFeaturesByClassroom(int classroomId)
+        {
+            return _appDbContext.Feature.Include(f => f.ClassroomFeatures).Where(f => f.ClassroomFeatures.All(cf => cf.ClassroomId == classroomId)); 
+        }
+        public Feature UpdateFeature(Feature feature)
+        {
+            Feature updatedFeature = _appDbContext.Feature.FirstOrDefault(c => c.Id == feature.Id);
+            updatedFeature = feature;
+            return updatedFeature;
         }
     }
 }

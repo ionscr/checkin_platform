@@ -9,5 +9,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         void AddUser(User user);
         User GetUserById(int id);
         void DeleteUser(User user);
+        User UpdateUser(User user);
     }
 }

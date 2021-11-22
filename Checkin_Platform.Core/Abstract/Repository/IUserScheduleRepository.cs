@@ -9,5 +9,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         void AddUserSchedule(UserSchedule userSchedule);
         UserSchedule GetUserScheduleById(int id);
         void DeleteUserSchedule(UserSchedule userSchedule);
+
     }
 }

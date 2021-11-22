@@ -9,5 +9,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         void AddClassroom(Classroom classroom);
         Classroom GetClassroomById(int id);
         void DeleteClassroom(Classroom classroom);
+        Classroom UpdateClassroom(Classroom classroom);
     }
 }

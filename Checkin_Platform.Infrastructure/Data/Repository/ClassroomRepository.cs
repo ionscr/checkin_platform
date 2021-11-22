@@ -28,5 +28,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Classroom.FirstOrDefault(c => c.Id == id);
         }
+        public Classroom UpdateClassroom(Classroom classroom)
+        {
+            Classroom updatedClassroom = _appDbContext.Classroom.FirstOrDefault(c => c.Id == classroom.Id);
+            updatedClassroom = classroom;
+            return updatedClassroom;
+        }
     }
 }
