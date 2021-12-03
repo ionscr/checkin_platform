@@ -1,5 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -12,9 +13,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<Classroom> GetClassrooms()
+        public IEnumerable<Classroom> GetClassrooms()
         {
-            return _appDbContext.Classroom.OrderBy(c => c.Id);
+            return _appDbContext.Classroom.OrderBy(c => c.Id).ToList();
         }
         public void AddClassroom(Classroom classroom)
         {

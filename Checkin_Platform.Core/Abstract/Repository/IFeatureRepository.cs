@@ -1,15 +1,15 @@
 ﻿using Checkin_Platform.Domain;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Abstract.Repository
 {
     public interface IFeatureRepository
     {
-        IQueryable<Feature> GetFeatures();
+        IEnumerable<Feature> GetFeatures();
         void AddFeature(Feature feature);
         Feature GetFeatureById(int id);
         void DeleteFeature(Feature feature);
-        IQueryable<Feature> GetFeaturesByClassroom(int classroomId);
+        IEnumerable<Feature> GetFeaturesByClassroom(int classroomId);
         Feature UpdateFeature(Feature feature);
     }
 }

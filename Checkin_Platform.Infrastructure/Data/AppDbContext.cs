@@ -20,13 +20,6 @@ namespace Checkin_Platform.Infrastructure.Data
         public DbSet<ClassroomFeature> ClassroomFeature { get; set; } 
         public DbSet<UserSchedule> UserSchedule { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=CheckinPlatform;Trusted_Connection=True;");
-            
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

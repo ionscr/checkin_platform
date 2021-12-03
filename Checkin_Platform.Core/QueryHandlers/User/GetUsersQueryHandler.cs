@@ -1,4 +1,5 @@
-﻿using Checkin_Platform.Core.Abstract;
+﻿using AutoMapper;
+using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Dto;
 using Checkin_Platform.Core.Queries.User;
 using MediatR;
@@ -12,27 +13,16 @@ namespace Checkin_Platform.Core.QueryHandlers.User
     public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, IEnumerable<GetUserDto>>
     {
         private IUnitOfWork _unitOfWork;
-        public GetUsersQueryHandler(IUnitOfWork unitOfWork)
+        private IMapper _mapper;
+        public GetUsersQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<GetUserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var userList = _unitOfWork.UserRepository.GetUsers();
-            var userDtoList = new List<GetUserDto>();
-            foreach (var item in userList)
-            {
-                userDtoList.Add(new GetUserDto
-                {
-                    Id = item.Id,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                    Role = item.Role,
-                    Department = item.Department,
-                    Group = item.Group,
-                    Year = item.Year
-                });
-            }
+            var userDtoList = _mapper.Map<IEnumerable<Domain.User>, IEnumerable<GetUserDto>>(userList);
             return userDtoList;
         }
     }

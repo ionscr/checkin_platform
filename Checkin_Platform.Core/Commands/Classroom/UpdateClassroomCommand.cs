@@ -5,6 +5,6 @@ namespace Checkin_Platform.Core.Commands.Classroom
 {
     public class UpdateClassroomCommand: IRequest<bool>
     {
-        public GetClassroomDto classroomDto { get; set; }
+        public GetClassroomDto ClassroomDto { get; set; }
     }
 }

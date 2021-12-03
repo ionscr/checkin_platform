@@ -1,5 +1,6 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -12,9 +13,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<User> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
-            return _appDbContext.User.OrderBy(c => c.Id);
+            return _appDbContext.User.OrderBy(c => c.Id).ToList();
         }
         public void AddUser(User user)
         {

@@ -5,6 +5,6 @@ namespace Checkin_Platform.Core.Commands.User
 {
     public class UpdateUserCommand : IRequest<bool>
     {
-        public GetUserDto userDto { get; set; }
+        public GetUserDto UserDto { get; set; }
     }
 }

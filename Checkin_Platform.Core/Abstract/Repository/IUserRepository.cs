@@ -1,11 +1,11 @@
 ﻿using Checkin_Platform.Domain;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Abstract.Repository
 {
     public interface IUserRepository
     {
-        IQueryable<User> GetUsers();
+        IEnumerable<User> GetUsers();
         void AddUser(User user);
         User GetUserById(int id);
         void DeleteUser(User user);

@@ -1,11 +1,11 @@
 ﻿using Checkin_Platform.Domain;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Abstract.Repository
 {
     public interface IClassroomRepository
     {
-        IQueryable<Classroom> GetClassrooms();
+        IEnumerable<Classroom> GetClassrooms();
         void AddClassroom(Classroom classroom);
         Classroom GetClassroomById(int id);
         void DeleteClassroom(Classroom classroom);

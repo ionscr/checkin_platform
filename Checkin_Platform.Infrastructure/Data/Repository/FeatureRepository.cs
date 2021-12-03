@@ -1,6 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -13,9 +14,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<Feature> GetFeatures()
+        public IEnumerable<Feature> GetFeatures()
         {
-            return _appDbContext.Feature.OrderBy(c => c.Id);
+            return _appDbContext.Feature.OrderBy(c => c.Id).ToList();
         }
         public void AddFeature(Feature feature)
         {
@@ -29,9 +30,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Feature.FirstOrDefault(c => c.Id == id);
         }
-        public IQueryable<Feature> GetFeaturesByClassroom(int classroomId)
+        public IEnumerable<Feature> GetFeaturesByClassroom(int classroomId)
         {
-            return _appDbContext.Feature.Include(f => f.ClassroomFeatures).Where(f => f.ClassroomFeatures.All(cf => cf.ClassroomId == classroomId)); 
+            return _appDbContext.Feature.Include(f => f.ClassroomFeatures).Where(f => f.ClassroomFeatures.Any(cf => cf.ClassroomId == classroomId)).ToList(); 
         }
         public Feature UpdateFeature(Feature feature)
         {

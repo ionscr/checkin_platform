@@ -7,7 +7,7 @@ namespace Checkin_Platform.Core.Dto
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
-        public Classroom Classroom { get; set; }
-        public Class Class { get; set; }
+        public GetClassroomDto Classroom { get; set; }
+        public GetClassDto Class { get; set; }
     }
 }

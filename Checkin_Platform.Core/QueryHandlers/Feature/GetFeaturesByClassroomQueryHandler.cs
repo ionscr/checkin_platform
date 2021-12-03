@@ -1,4 +1,5 @@
-﻿using Checkin_Platform.Core.Abstract;
+﻿using AutoMapper;
+using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Dto;
 using Checkin_Platform.Core.Queries.Feature;
 using MediatR;
@@ -12,22 +13,16 @@ namespace Checkin_Platform.Core.QueryHandlers.Feature
     public class GetFeaturesByClassroomQueryHandler : IRequestHandler<GetFeaturesByClassroomQuery, IEnumerable<GetFeatureDto>>
     {
         private IUnitOfWork _unitOfWork;
-        public GetFeaturesByClassroomQueryHandler(IUnitOfWork unitOfWork)
+        private IMapper _mapper;
+        public GetFeaturesByClassroomQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<GetFeatureDto>> Handle(GetFeaturesByClassroomQuery request, CancellationToken cancellationToken)
         {
             var featureList = _unitOfWork.FeatureRepository.GetFeaturesByClassroom(request.ClassroomId);
-            var featureDtoList = new List<GetFeatureDto>();
-            foreach (var item in featureList)
-            {
-                featureDtoList.Add(new GetFeatureDto
-                {
-                    Id = item.Id,
-                    Name = item.Name
-                });
-            }
+            var featureDtoList = _mapper.Map<IEnumerable<Domain.Feature>, IEnumerable<GetFeatureDto>>(featureList);
             return featureDtoList;
         }
     }

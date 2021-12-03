@@ -1,5 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -12,9 +14,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<UserSchedule> GetUserSchedules()
+        public IEnumerable<UserSchedule> GetUserSchedules()
         {
-            return _appDbContext.UserSchedule.OrderBy(c => c.Id);
+            return _appDbContext.UserSchedule.Include(us => us.Schedule).Include(us => us.User).OrderBy(c => c.Id).ToList();
         }
         public void AddUserSchedule(UserSchedule userSchedule)
         {

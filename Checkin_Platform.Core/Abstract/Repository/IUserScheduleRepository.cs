@@ -1,11 +1,11 @@
 ﻿using Checkin_Platform.Domain;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Abstract.Repository
 {
     public interface IUserScheduleRepository
     {
-        IQueryable<UserSchedule> GetUserSchedules();
+        IEnumerable<UserSchedule> GetUserSchedules();
         void AddUserSchedule(UserSchedule userSchedule);
         UserSchedule GetUserScheduleById(int id);
         void DeleteUserSchedule(UserSchedule userSchedule);

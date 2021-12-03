@@ -1,5 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -12,9 +14,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<Class> GetClasses()
+        public IEnumerable<Class> GetClasses()
         {
-            return _appDbContext.Class.OrderBy(c => c.Id);
+            return _appDbContext.Class.Include(c => c.Teacher).OrderBy(c => c.Id).ToList();
         }
         public void AddClass(Class classToAdd)
         {
@@ -26,7 +28,7 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public Class GetClassById(int id)
         {
-            return _appDbContext.Class.FirstOrDefault(c => c.Id == id);
+            return _appDbContext.Class.Include(c => c.Teacher).FirstOrDefault(c => c.Id == id);
         }
         public Class UpdateClass(Class Class)
         {

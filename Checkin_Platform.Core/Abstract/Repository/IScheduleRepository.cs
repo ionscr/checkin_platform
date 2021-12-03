@@ -1,18 +1,18 @@
 ﻿using Checkin_Platform.Domain;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Checkin_Platform.Core.Abstract.Repository
 {
     public interface IScheduleRepository
     {
-        IQueryable<Schedule> GetSchedules();
+        IEnumerable<Schedule> GetSchedules();
         void AddSchedule(Schedule schedule);
         Schedule GetScheduleById(int id);
         void DeleteSchedule(Schedule schedule);
-        IQueryable<Schedule> GetSchedulesByDate(DateTime dateTime);
-        IQueryable<Schedule> GetSchedulesByTeacher(int teacherId);
-        IQueryable<Schedule> GetSchedulesByUserReservations(int userId);
+        IEnumerable<Schedule> GetSchedulesByDate(DateTime dateTime);
+        IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId);
+        IEnumerable<Schedule> GetSchedulesByUserReservations(int userId);
 
         Schedule UpdateSchedule(Schedule schedule);
     }

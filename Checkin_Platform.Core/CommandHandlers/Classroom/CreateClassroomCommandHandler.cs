@@ -1,5 +1,7 @@
-﻿using Checkin_Platform.Core.Abstract;
+﻿using AutoMapper;
+using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.Classroom;
+using Checkin_Platform.Core.Dto;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,20 +11,18 @@ namespace Checkin_Platform.Core.CommandHandlers.Classroom
     public class CreateClassroomCommandHandler: IRequestHandler<CreateClassroomCommand, bool>
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public CreateClassroomCommandHandler(IUnitOfWork unitOfWork)
+        public CreateClassroomCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(CreateClassroomCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ClassroomRepository.AddClassroom(new Domain.Classroom
-            {
-                Name = request.ClassroomDto.Name,
-                Capacity = request.ClassroomDto.Capacity,
-                Location = request.ClassroomDto.Location
-            });
+            var item = _mapper.Map<SetClassroomDto, Domain.Classroom>(request.ClassroomDto);
+            _unitOfWork.ClassroomRepository.AddClassroom(item);
             _unitOfWork.SaveChanges();
             return true;
         }

@@ -17,15 +17,15 @@ namespace Checkin_Platform.Core.CommandHandlers.User
 
         public async Task<bool> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var item = _unitOfWork.UserRepository.GetUserById(request.userDto.Id);
-            item.FirstName = request.userDto.FirstName;
-            item.LastName = request.userDto.LastName;
+            var item = _unitOfWork.UserRepository.GetUserById(request.UserDto.Id);
+            item.FirstName = request.UserDto.FirstName;
+            item.LastName = request.UserDto.LastName;
             if(item.Role == "Student")
             {
-                item.Year = request.userDto.Year;
-                item.Group = request.userDto.Group;
+                item.Year = request.UserDto.Year;
+                item.Group = request.UserDto.Group;
             }
-            if(item.Role == "Teacher") item.Department = request.userDto.Department;
+            if(item.Role == "Teacher") item.Department = request.UserDto.Department;
             _unitOfWork.UserRepository.UpdateUser(item);
             _unitOfWork.SaveChanges();
             return true;

@@ -5,6 +5,6 @@ namespace Checkin_Platform.Core.Commands.Feature
 {
     public class UpdateFeatureCommand : IRequest<bool>
     {
-        public GetFeatureDto featureDto { get; set; }
+        public GetFeatureDto FeatureDto { get; set; }
     }
 }

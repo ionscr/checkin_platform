@@ -1,6 +1,8 @@
-﻿using Checkin_Platform.Core.Abstract;
+﻿using AutoMapper;
+using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Dto;
 using Checkin_Platform.Core.Queries.Class;
+using Checkin_Platform.Domain;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,25 +13,16 @@ namespace Checkin_Platform.Core.QueryHandlers.Class
     public class GetClassesQueryHandler : IRequestHandler<GetClassesQuery, IEnumerable<GetClassDto>>
     {
         private IUnitOfWork _unitOfWork;
-        public GetClassesQueryHandler(IUnitOfWork unitOfWork)
+        private IMapper _mapper;
+        public GetClassesQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<GetClassDto>> Handle(GetClassesQuery request, CancellationToken cancellationToken)
         {
             var classList =  _unitOfWork.ClassRepository.GetClasses();
-            var classDtoList = new List<GetClassDto>();
-            foreach(var item in classList)
-            {
-                classDtoList.Add(new GetClassDto
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Section = item.Section,
-                    Teacher = item.Teacher,
-                    Year = item.Year
-                });
-            }
+            var classDtoList = _mapper.Map<IEnumerable<Domain.Class>, IEnumerable<GetClassDto>>(classList);
             return classDtoList;
         }
     }

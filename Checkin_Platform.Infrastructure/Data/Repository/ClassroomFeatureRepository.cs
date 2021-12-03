@@ -1,5 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract.Repository;
 using Checkin_Platform.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
@@ -12,9 +14,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             _appDbContext = appDbContext;
         }
-        public IQueryable<ClassroomFeature> GetClassroomFeatures()
+        public IEnumerable<ClassroomFeature> GetClassroomFeatures()
         {
-            return _appDbContext.ClassroomFeature.OrderBy(c => c.Id);
+            return _appDbContext.ClassroomFeature.Include(c => c.Classroom).Include(c => c.Feature).OrderBy(c => c.Id).ToList();
         }
         public void AddClassroomFeature(ClassroomFeature classroomFeature)
         {
