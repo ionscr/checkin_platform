@@ -16,12 +16,10 @@ namespace Checkin_Platform.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private IMediator _mediator;
-        private IMapper _mapper;
-        public ClassController(IUnitOfWork unitOfWork, IMediator mediator, IMapper mapper)
+        public ClassController(IUnitOfWork unitOfWork, IMediator mediator)
         {
             _unitOfWork = unitOfWork;
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [HttpGet]

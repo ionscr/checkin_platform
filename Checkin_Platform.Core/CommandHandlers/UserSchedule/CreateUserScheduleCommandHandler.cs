@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.CommandHandlers.UserSchedule
 {
-    public class CreateUserScheduleCommandHandler: IRequest<bool>
+    public class CreateUserScheduleCommandHandler: IRequestHandler<CreateUserScheduleCommand,bool>
     {
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;

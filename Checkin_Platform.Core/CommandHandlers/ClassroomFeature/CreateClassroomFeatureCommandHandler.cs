@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Checkin_Platform.Core.CommandHandlers.ClassroomFeature
 {
-    public class CreateClassroomFeatureCommandHandler: IRequest<bool>
+    public class CreateClassroomFeatureCommandHandler: IRequestHandler<CreateClassroomFeatureCommand,bool>
     {
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;

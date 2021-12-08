@@ -34,8 +34,9 @@ namespace Checkin_Platform
             services.AddMediatR(typeof(AssemblyMarker));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(AssemblyMarker));
-            services.AddRazorPages();
             services.AddControllers();
+            services.AddCors(opts => opts.AddPolicy("AllowAllOrigins",
+                   builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +64,8 @@ namespace Checkin_Platform
             {
                 endpoints.MapControllers();
             });
+            app.UseCors("AllowAllOrigins");
+
 
         }
     }
