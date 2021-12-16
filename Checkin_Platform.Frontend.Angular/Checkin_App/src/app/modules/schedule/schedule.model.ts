@@ -1,5 +1,5 @@
-import { Class } from "./Class";
-import { Classroom } from "./Classroom";
+import { Class } from "../class/class.model";
+import { Classroom } from "../classroom/classroom.model";
 
 export interface Schedule{
     Id?: number;

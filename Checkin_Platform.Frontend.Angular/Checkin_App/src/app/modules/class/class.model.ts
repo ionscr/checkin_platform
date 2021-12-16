@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "../user/user.model";
 
 export interface Class{
     Id?: number;

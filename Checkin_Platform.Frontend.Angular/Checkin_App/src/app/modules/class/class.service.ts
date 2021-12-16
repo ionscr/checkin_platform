@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Class } from '../models/Class';
+import { Class } from './class.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassService {
-  private apiServerUrl = `${environment.apiBaseUrl}/class`;
+  private apiServerUrl = `${environment.apiBaseUrl}class`;
   constructor(private http: HttpClient) { }
 
   public GetClasses(): Observable<Class[]>{
