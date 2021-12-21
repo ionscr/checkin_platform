@@ -13,7 +13,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IEnumerable<Schedule> GetSchedulesByDate(DateTime dateTime);
         IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId);
         IEnumerable<Schedule> GetSchedulesByUserReservations(int userId);
-
+        IEnumerable<Schedule> GetSchedulesByWeek(DateTime StartDate);
         Schedule UpdateSchedule(Schedule schedule);
     }
 }

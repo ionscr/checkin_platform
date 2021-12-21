@@ -35,6 +35,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.DateTime.Date == dateTime.Date).OrderBy(s => s.DateTime).ToList();
         }
+        public IEnumerable<Schedule> GetSchedulesByWeek(DateTime StartDate)
+        {
+            DateTime EndDate = StartDate.AddDays(5);
+            return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.DateTime.Date >= StartDate.Date && s.DateTime.Date <= EndDate.Date).OrderBy(s => s.DateTime).ToList();
+        }
         public IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId)
         {
             return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.Class.Teacher.Id == teacherId).ToList();
