@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { Class } from 'src/app/modules/class/class.model';
-
-import * as classActions from '../../modules/class/state/class.actions';
-import * as classReducer from '../../modules/class/state/class.reducer';
-import * as classSelector from '../../modules/class/state/class.selector';
+import { LoginService } from 'src/app/services/login/login.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../dialogs/login/login.component';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -14,14 +10,25 @@ import * as classSelector from '../../modules/class/state/class.selector';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  title: String = 'Check-in Platform';
-  classes$?: Observable<Class[]>;
-  error$?: Observable<String>;
-  constructor(private store: Store<classReducer.AppState>) {}
+  title: string = 'Check-in Platform';
+  logged: boolean = false;
+  currentUser?: User;
+  constructor(private loginService: LoginService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    //this.store.dispatch(new classActions.LoadClasses());
-    //this.classes$ = this.store.pipe(select(classSelector.getClasses));
-    //this.error$ = this.store.pipe(select(classSelector.getError));
+    this.loginService.loggedChange.subscribe((value) => (this.logged = value));
+    this.logged = this.loginService.getLogged();
+    if (this.logged) this.currentUser = this.loginService.getUser();
+  }
+
+  LogIn() {
+    const dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != undefined) this.loginService.logIn(result);
+      if (this.logged) this.currentUser = this.loginService.getUser();
+    });
+  }
+  LogOut() {
+    this.loginService.logOut();
   }
 }

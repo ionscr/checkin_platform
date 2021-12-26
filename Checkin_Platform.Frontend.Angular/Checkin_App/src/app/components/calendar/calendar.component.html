@@ -1,0 +1,26 @@
+<table class="calendar">
+  <thead>
+    <tr>
+      <th class="width10">
+        {{ monday }} - {{ friday }} <br />
+        <button mat-icon-button (click)="onBackward()" [disabled]="weekNr == 0">
+          <mat-icon aria-hidden="false" aria-label="backward-icon"
+            >arrow_back_ios</mat-icon
+          >
+        </button>
+        <button mat-icon-button (click)="onForward()">
+          <mat-icon aria-hidden="false" aria-label="forward-icon"
+            >arrow_forward_ios</mat-icon
+          >
+        </button>
+      </th>
+      <th class="width18">Monday</th>
+      <th class="width18">Tuesday</th>
+      <th class="width18">Wednesday</th>
+      <th class="width18">Thursday</th>
+      <th class="width18">Friday</th>
+    </tr>
+  </thead>
+</table>
+<mat-divider></mat-divider>
+<app-schedule-week [weekNr]="weekNr"></app-schedule-week>

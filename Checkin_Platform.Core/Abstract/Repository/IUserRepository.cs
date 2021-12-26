@@ -6,6 +6,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
     public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
+        IEnumerable<string> GetUsersRoles();
         void AddUser(User user);
         User GetUserById(int id);
         void DeleteUser(User user);

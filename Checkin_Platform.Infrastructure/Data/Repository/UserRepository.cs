@@ -17,6 +17,10 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.User.OrderBy(c => c.Id).ToList();
         }
+        public IEnumerable<string> GetUsersRoles()
+        {
+            return _appDbContext.User.Select(r => r.Role).Distinct().ToList();
+        }
         public void AddUser(User user)
         {
             _appDbContext.User.Add(user);

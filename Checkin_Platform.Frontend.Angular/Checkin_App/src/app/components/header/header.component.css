@@ -1,4 +1,9 @@
 .mat-toolbar-row, .mat-toolbar-single-row {
 padding : 0 100px;
-height: 100px;
+height: 130px;
+justify-content: space-between;
+}
+.login{
+    text-align: right;
+    font: 300 18px/32px Roboto, "Helvetica Neue", sans-serif;
 }

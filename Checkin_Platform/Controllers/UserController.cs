@@ -28,6 +28,14 @@ namespace Checkin_Platform.Controllers
             var result = await _mediator.Send(getUsersQuery);
             return Ok(result);
         }
+        [HttpGet]
+        [Route("{roles}")]
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetUsersRoles()
+        {
+            var getUsersRolesQuery = new GetUsersRolesQuery() { };
+            var result = await _mediator.Send(getUsersRolesQuery);
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<ActionResult<bool>> CreateUser([FromBody] SetUserDto userDto)
