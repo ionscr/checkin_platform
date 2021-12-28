@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Checkin_Platform.Core.Dto.Schedule;
 
 namespace Checkin_Platform.Infrastructure.Data.Repository
 {
@@ -35,10 +36,21 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.DateTime.Date == dateTime.Date).OrderBy(s => s.DateTime).ToList();
         }
-        public IEnumerable<Schedule> GetSchedulesByWeek(DateTime StartDate)
+        public IEnumerable<GetGroupScheduleDtoUnfixed> GetSchedulesByWeek(DateTime StartDate)
         {
             DateTime EndDate = StartDate.AddDays(5);
-            return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.DateTime.Date >= StartDate.Date && s.DateTime.Date <= EndDate.Date).OrderBy(s => s.DateTime).ToList();
+            var a = _appDbContext.Schedule.Include(s => s.Class)
+                .ThenInclude(s => s.Teacher)
+                .Include(s => s.Classroom)
+                .Where(s => s.DateTime.Date >= StartDate.Date && s.DateTime.Date <= EndDate.Date)
+                .OrderBy(s => s.DateTime).ToList().GroupBy(g => g.DateTime.Date).Select(x => new GetGroupScheduleDtoUnfixed
+                {
+                    Date = x.Key,
+                    Schedules = x.ToList()
+                }).ToList();
+
+            
+            return a;
         }
         public IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId)
         {

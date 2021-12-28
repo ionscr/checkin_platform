@@ -3,6 +3,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../dialogs/login/login.component';
 import { User } from 'src/app/models/user.model';
+import { ManageClassesComponent } from '../dialogs/manage-classes/manage-classes.component';
 
 @Component({
   selector: 'app-header',
@@ -30,5 +31,20 @@ export class HeaderComponent implements OnInit {
   }
   LogOut() {
     this.loginService.logOut();
+  }
+  manageClasses() {
+    const dialogRef = this.dialog.open(ManageClassesComponent);
+  }
+  manageClassrooms() {
+    const dialogRef = this.dialog.open(LoginComponent);
+  }
+  manageFeatures() {
+    const dialogRef = this.dialog.open(LoginComponent);
+  }
+  manageSchedules() {
+    const dialogRef = this.dialog.open(LoginComponent);
+  }
+  manageUsers() {
+    const dialogRef = this.dialog.open(LoginComponent);
   }
 }

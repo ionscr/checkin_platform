@@ -1,6 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.Schedule;
 using Checkin_Platform.Core.Dto;
+using Checkin_Platform.Core.Dto.Schedule;
 using Checkin_Platform.Core.Queries.Schedule;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace Checkin_Platform.Controllers
         }
         [Route("week/{dateTime}")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetScheduleDto>>> GetSchedulesByWeek(DateTime dateTime)
+        public async Task<ActionResult<IEnumerable<GetGroupScheduleDto>>> GetSchedulesByWeek(DateTime dateTime)
         {
             var getSchedulesByWeekQuery = new GetSchedulesByWeekQuery()
             {

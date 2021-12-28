@@ -1,4 +1,5 @@
-﻿using Checkin_Platform.Domain;
+﻿using Checkin_Platform.Core.Dto.Schedule;
+using Checkin_Platform.Domain;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IEnumerable<Schedule> GetSchedulesByDate(DateTime dateTime);
         IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId);
         IEnumerable<Schedule> GetSchedulesByUserReservations(int userId);
-        IEnumerable<Schedule> GetSchedulesByWeek(DateTime StartDate);
         Schedule UpdateSchedule(Schedule schedule);
+        IEnumerable<GetGroupScheduleDtoUnfixed> GetSchedulesByWeek(DateTime StartDate);
     }
 }

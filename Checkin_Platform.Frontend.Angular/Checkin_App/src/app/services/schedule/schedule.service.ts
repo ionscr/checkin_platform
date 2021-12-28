@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Schedule } from 'src/app/models/schedule.model';
+import { ScheduleGroup } from 'src/app/models/schedule_group.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,9 @@ export class ScheduleService {
   public GetSchedules(): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(`${this.apiServerUrl}`);
   }
-
+  public GetSchedulesByWeek(date: String): Observable<ScheduleGroup[]> {
+    return this.http.get<ScheduleGroup[]>(`${this.apiServerUrl}/week/${date}`);
+  }
   public CreateSchedule(schedule: Schedule): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiServerUrl}`, schedule);
   }

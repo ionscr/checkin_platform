@@ -2,7 +2,13 @@
   <tr>
     <td class="width10"></td>
     <td *ngFor="let day of week">
-      <app-schedule-day></app-schedule-day>
+      <div *ngFor="let sch of weekSchedules">
+        <app-schedule-day
+          *ngIf="sch.Date.toString() == day + 'T00:00:00'"
+          [schedules]="sch.Schedules"
+        >
+        </app-schedule-day>
+      </div>
     </td>
   </tr>
 </table>

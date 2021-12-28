@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.userService.GetUsers().subscribe((users) => {
       this.users = users;
     });
+    console.log(this.users);
     this.userService.GetRoles().subscribe((roles) => {
       this.roles = roles;
     });

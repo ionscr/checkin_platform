@@ -1,0 +1,138 @@
+<h2 mat-dialog-title>Manage Classes</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group (selectedTabChange)="onChange()">
+    <mat-tab label="Add">
+      <form [formGroup]="newClassForm" (ngSubmit)="onSubmitAdd()">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="Name"
+            matInput
+            placeholder="Insert class name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Teacher</mat-label>
+          <mat-select formControlName="UserId">
+            <mat-option *ngFor="let teacher of teachers" [value]="teacher.Id"
+              >{{ teacher.FirstName }} {{ teacher.LastName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Year</mat-label>
+          <input
+            pattern="[0-9]*"
+            formControlName="Year"
+            type="number"
+            matInput
+            placeholder="Insert class name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Section</mat-label>
+          <input
+            formControlName="Section"
+            matInput
+            placeholder="Insert class name"
+          />
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!newClassForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Update">
+      <form [formGroup]="updateClassForm" (ngSubmit)="onSubmitUpdate()">
+        <mat-form-field appearance="fill">
+          <mat-label>Class to update</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectClassToUpdate($event)"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class">
+              {{ class.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="updateForm" *ngIf="isSelectedClassToUpdate">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              formControlName="Name"
+              matInput
+              placeholder="Insert class name"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Teacher</mat-label>
+            <mat-select formControlName="Teacher" [(value)]="updateTeacher">
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher"
+                >{{ teacher.FirstName }} {{ teacher.LastName }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <input
+              pattern="[0-9]*"
+              formControlName="Year"
+              type="number"
+              matInput
+              placeholder="Insert class name"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Section</mat-label>
+            <input
+              formControlName="Section"
+              matInput
+              placeholder="Insert class name"
+            />
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!updateClassForm.valid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Delete">
+      <form [formGroup]="deleteClassForm" (ngSubmit)="onSubmitDelete()">
+        <mat-form-field appearance="fill">
+          <mat-label>Class to delete</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectClassToDelete($event)"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class">
+              {{ class.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!isSelectedClassToDelete"
+        >
+          Delete
+        </button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="close()">Close</button>
+</mat-dialog-actions>

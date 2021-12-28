@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,6 +12,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +26,7 @@ import { ScheduleWeekComponent } from './components/schedule-week/schedule-week.
 import { ScheduleDayComponent } from './components/schedule-day/schedule-day.component';
 import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
 import { LoginComponent } from './components/dialogs/login/login.component';
+import { ManageClassesComponent } from './components/dialogs/manage-classes/manage-classes.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import { LoginComponent } from './components/dialogs/login/login.component';
     ScheduleDayComponent,
     ScheduleItemComponent,
     LoginComponent,
+    ManageClassesComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,10 +48,15 @@ import { LoginComponent } from './components/dialogs/login/login.component';
     MatSelectModule,
     MatDividerModule,
     MatStepperModule,
+    MatTabsModule,
     MatIconModule,
     MatTableModule,
+    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

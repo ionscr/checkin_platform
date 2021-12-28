@@ -7,3 +7,9 @@ justify-content: space-between;
     text-align: right;
     font: 300 18px/32px Roboto, "Helvetica Neue", sans-serif;
 }
+.control_buttons{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    vertical-align: middle;
+}

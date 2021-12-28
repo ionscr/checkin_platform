@@ -40,9 +40,10 @@
   </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button color="warn" (click)="close()">Cancel</button>
   <button
     mat-button
+    color="primary"
     [disabled]="selectedUser == undefined || null"
     (click)="logIn()"
   >

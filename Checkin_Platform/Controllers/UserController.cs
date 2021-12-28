@@ -29,7 +29,17 @@ namespace Checkin_Platform.Controllers
             return Ok(result);
         }
         [HttpGet]
-        [Route("{roles}")]
+        [Route("role/{role}")]
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetUsersByRole(string role)
+        {
+            var getUsersByRoleQuery = new GetUsersByRoleQuery() {
+            role = role
+            };
+            var result = await _mediator.Send(getUsersByRoleQuery);
+            return Ok(result);
+        }
+        [HttpGet]
+        [Route("roles")]
         public async Task<ActionResult<IEnumerable<GetUserDto>>> GetUsersRoles()
         {
             var getUsersRolesQuery = new GetUsersRolesQuery() { };

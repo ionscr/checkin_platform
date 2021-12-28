@@ -6,7 +6,40 @@
     <p *ngIf="logged && currentUser != undefined">
       Welcome, <i>{{ currentUser.FirstName }} {{ currentUser.LastName }}</i>
     </p>
-    <button *ngIf="!logged" mat-raised-button (click)="LogIn()">Log In</button>
-    <button *ngIf="logged" mat-raised-button (click)="LogOut()">Log Out</button>
+    <div class="control_buttons">
+      <div
+        *ngIf="
+          logged &&
+          currentUser != undefined &&
+          currentUser.Role == 'Administrator'
+        "
+      >
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+          Menu
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="manageClasses()">
+            Manage classes
+          </button>
+          <button mat-menu-item (click)="manageClassrooms()">
+            Manage classrooms
+          </button>
+          <button mat-menu-item (click)="manageFeatures()">
+            Manage features
+          </button>
+          <button mat-menu-item (click)="manageSchedules()">
+            Manage schedules
+          </button>
+          <button mat-menu-item (click)="manageUsers()">Manage users</button>
+        </mat-menu>
+      </div>
+
+      <button *ngIf="!logged" mat-raised-button (click)="LogIn()">
+        Log In
+      </button>
+      <button *ngIf="logged" mat-raised-button color="warn" (click)="LogOut()">
+        Log Out
+      </button>
+    </div>
   </div>
 </mat-toolbar>
