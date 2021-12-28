@@ -18,11 +18,11 @@ namespace Checkin_Platform.Core.CommandHandlers.ClassroomFeature
 
         public async Task<bool> Handle(DeleteClassroomFeatureCommand request, CancellationToken cancellationToken)
         {
-            var item = _unitOfWork.ClassroomFeatureRepository.GetClassroomFeatureById(request.Id);
+            var item = _unitOfWork.ClassroomFeatureRepository.GetClassroomFeatureByProps(request.FeatureId, request.ClassroomId);
 
             if (item == null)
             {
-                throw new EntityNotFoundException("ClassroomFeature", request.Id);
+                throw new EntityNotFoundException("ClassroomFeature", request.FeatureId);
             }
             _unitOfWork.ClassroomFeatureRepository.DeleteClassroomFeature(item);
             _unitOfWork.SaveChanges();

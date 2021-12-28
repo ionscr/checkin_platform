@@ -40,13 +40,13 @@ namespace Checkin_Platform.Controllers
             return Ok(true);
         }
 
-        [Route("{classroomFeatureId}")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> DeleteClassroomFeature(int classroomFeatureId)
+        public async Task<ActionResult<bool>> DeleteClassroomFeature([FromBody] SetClassroomFeatureDto classroomFeatureDto)
         {
             var deleteClassroomFeatureCommand = new DeleteClassroomFeatureCommand()
             {
-                Id = classroomFeatureId
+                FeatureId = classroomFeatureDto.FeatureId,
+                ClassroomId = classroomFeatureDto.ClassroomId
             };
             var result = await _mediator.Send(deleteClassroomFeatureCommand);
             return Ok(true);

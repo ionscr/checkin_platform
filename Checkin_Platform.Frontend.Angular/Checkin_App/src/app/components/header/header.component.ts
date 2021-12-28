@@ -4,6 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../dialogs/login/login.component';
 import { User } from 'src/app/models/user.model';
 import { ManageClassesComponent } from '../dialogs/manage-classes/manage-classes.component';
+import { ManageClassroomsComponent } from '../dialogs/manage-classrooms/manage-classrooms.component';
+import { ManageFeaturesComponent } from '../dialogs/manage-features/manage-features.component';
+import { ManageUsersComponent } from '../dialogs/manage-users/manage-users.component';
+import { ManageSchedulesComponent } from '../dialogs/manage-schedules/manage-schedules.component';
 
 @Component({
   selector: 'app-header',
@@ -36,15 +40,15 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(ManageClassesComponent);
   }
   manageClassrooms() {
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(ManageClassroomsComponent);
   }
   manageFeatures() {
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(ManageFeaturesComponent);
   }
   manageSchedules() {
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(ManageSchedulesComponent);
   }
   manageUsers() {
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(ManageUsersComponent);
   }
 }

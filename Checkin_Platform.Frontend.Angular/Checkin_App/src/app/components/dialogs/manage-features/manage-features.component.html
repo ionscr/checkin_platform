@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>Manage Features</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group (selectedTabChange)="onChange()">
+    <mat-tab label="Add">
+      <form [formGroup]="newFeatureForm" (ngSubmit)="onSubmitAdd()">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="Name"
+            matInput
+            placeholder="Insert feature name"
+          />
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!newFeatureForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Update">
+      <form [formGroup]="updateFeatureForm" (ngSubmit)="onSubmitUpdate()">
+        <mat-form-field appearance="fill">
+          <mat-label>Feature to update</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectFeatureToUpdate($event)"
+          >
+            <mat-option *ngFor="let feature of features" [value]="feature">
+              {{ feature.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="updateForm" *ngIf="isSelectedFeatureToUpdate">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              formControlName="Name"
+              matInput
+              placeholder="Insert feature name"
+            />
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!updateFeatureForm.valid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Delete">
+      <form [formGroup]="deleteFeatureForm" (ngSubmit)="onSubmitDelete()">
+        <mat-form-field appearance="fill">
+          <mat-label>Feature to delete</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectFeatureToDelete($event)"
+          >
+            <mat-option *ngFor="let feature of features" [value]="feature">
+              {{ feature.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!isSelectedFeatureToDelete"
+        >
+          Delete
+        </button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="close()">Close</button>
+</mat-dialog-actions>

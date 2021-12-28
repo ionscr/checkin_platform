@@ -40,7 +40,17 @@ namespace Checkin_Platform.Controllers
             var result = await _mediator.Send(getFeaturesByClassroomQuery);
             return Ok(result);
         }
-
+        [Route("other/{classroomId}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetFeatureDto>>> GetOtherFeaturesByClassroom(int classroomId)
+        {
+            var getOtherFeaturesByClassroomQuery = new GetOtherFeaturesByClassroomQuery()
+            {
+                ClassroomId = classroomId
+            };
+            var result = await _mediator.Send(getOtherFeaturesByClassroomQuery);
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<ActionResult<bool>> CreateFeature([FromBody] SetFeatureDto featureDto)
         {

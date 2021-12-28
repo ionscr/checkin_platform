@@ -1,0 +1,188 @@
+<h2 mat-dialog-title>Manage Classrooms</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group (selectedTabChange)="onChange()">
+    <mat-tab label="Add">
+      <form [formGroup]="newClassroomForm" (ngSubmit)="onSubmitAdd()">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="Name"
+            matInput
+            placeholder="Insert classroom name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Capacity</mat-label>
+          <input
+            pattern="[0-9]*"
+            formControlName="Capacity"
+            type="number"
+            matInput
+            placeholder="Insert classroom capacity"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Location</mat-label>
+          <input
+            formControlName="Location"
+            matInput
+            placeholder="Insert classroom location"
+          />
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!newClassroomForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Update">
+      <form [formGroup]="updateClassroomForm" (ngSubmit)="onSubmitUpdate()">
+        <mat-form-field appearance="fill">
+          <mat-label>Classroom to update</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectClassroomToUpdate($event)"
+          >
+            <mat-option
+              *ngFor="let classroom of classrooms"
+              [value]="classroom"
+            >
+              {{ classroom.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="updateForm" *ngIf="isSelectedClassroomToUpdate">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              formControlName="Name"
+              matInput
+              placeholder="Insert classroom name"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Capacity</mat-label>
+            <input
+              pattern="[0-9]*"
+              formControlName="Capacity"
+              type="number"
+              matInput
+              placeholder="Insert classroom capacity"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input
+              formControlName="Location"
+              matInput
+              placeholder="Insert classroom location"
+            />
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!updateClassroomForm.valid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Delete">
+      <form [formGroup]="deleteClassroomForm" (ngSubmit)="onSubmitDelete()">
+        <mat-form-field appearance="fill">
+          <mat-label>Classroom to delete</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectClassroomToDelete($event)"
+          >
+            <mat-option
+              *ngFor="let classroom of classrooms"
+              [value]="classroom"
+            >
+              {{ classroom.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!isSelectedClassroomToDelete"
+        >
+          Delete
+        </button>
+      </form>
+    </mat-tab>
+    <mat-tab label="Manage features">
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Classroom to manage</mat-label>
+          <mat-select (selectionChange)="onSelectClassroomToManage($event)">
+            <mat-option
+              *ngFor="let classroom of classrooms"
+              [value]="classroom"
+            >
+              {{ classroom.Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <mat-divider></mat-divider>
+      <div class="manageForm" *ngIf="isSelectedClassroomToManage">
+        <form [formGroup]="removeFeaturesForm" (ngSubmit)="onRemoveFeature()">
+          <mat-form-field appearance="outline">
+            <mat-label>Remove a feature</mat-label>
+            <mat-select formControlName="Id">
+              <mat-option
+                *ngFor="let feature of currentFeatures"
+                [value]="feature.Id"
+              >
+                {{ feature.Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!isSelectedClassroomToManage"
+          >
+            Remove
+          </button>
+        </form>
+        <form [formGroup]="addFeaturesForm" (ngSubmit)="onAddFeature()">
+          <mat-form-field appearance="outline">
+            <mat-label>Add a feature</mat-label>
+            <mat-select formControlName="Id">
+              <mat-option
+                *ngFor="let feature of otherFeatures"
+                [value]="feature.Id"
+              >
+                {{ feature.Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!isSelectedClassroomToManage"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="close()">Close</button>
+</mat-dialog-actions>

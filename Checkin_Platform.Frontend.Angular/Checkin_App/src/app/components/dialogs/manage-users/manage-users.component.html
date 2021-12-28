@@ -1,0 +1,185 @@
+<h2 mat-dialog-title>Manage Users</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-tab-group (selectedTabChange)="onChange()">
+    <mat-tab label="Add">
+      <form [formGroup]="newUserForm" (ngSubmit)="onSubmitAdd()">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input
+            formControlName="FirstName"
+            matInput
+            placeholder="Insert user first name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input
+            formControlName="LastName"
+            matInput
+            placeholder="Insert user last name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select
+            formControlName="Role"
+            (selectionChange)="onSelectUserRole($event)"
+          >
+            <mat-option value="Administrator">Administrator</mat-option>
+            <mat-option value="Teacher">Teacher</mat-option>
+            <mat-option value="Student">Student</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="selectedRole == 'Teacher'">
+          <mat-label>Department</mat-label>
+          <input
+            formControlName="Department"
+            matInput
+            placeholder="Insert teacher department"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="selectedRole == 'Student'">
+          <mat-label>Group</mat-label>
+          <input
+            formControlName="Group"
+            matInput
+            placeholder="Insert student group"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="selectedRole == 'Student'">
+          <mat-label>Year</mat-label>
+          <input
+            pattern="[0-9]*"
+            formControlName="Year"
+            type="number"
+            matInput
+            placeholder="Insert student year"
+          />
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!newUserForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Update">
+      <form [formGroup]="updateUserForm" (ngSubmit)="onSubmitUpdate()">
+        <mat-form-field appearance="fill">
+          <mat-label>User to update</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectUserToUpdate($event)"
+          >
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.FirstName }} {{ user.LastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="updateForm" *ngIf="isSelectedUserToUpdate">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+              formControlName="FirstName"
+              matInput
+              placeholder="Insert user first name"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              formControlName="LastName"
+              matInput
+              placeholder="Insert user last name"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select
+              formControlName="Role"
+              (selectionChange)="onSelectUserRole($event)"
+            >
+              <mat-option value="Administrator">Administrator</mat-option>
+              <mat-option value="Teacher">Teacher</mat-option>
+              <mat-option value="Student">Student</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            *ngIf="selectedRole == 'Teacher'"
+          >
+            <mat-label>Department</mat-label>
+            <input
+              formControlName="Department"
+              matInput
+              placeholder="Insert teacher department"
+            />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            *ngIf="selectedRole == 'Student'"
+          >
+            <mat-label>Group</mat-label>
+            <input
+              formControlName="Group"
+              matInput
+              placeholder="Insert student group"
+            />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            *ngIf="selectedRole == 'Student'"
+          >
+            <mat-label>Year</mat-label>
+            <input
+              pattern="[0-9]*"
+              formControlName="Year"
+              type="number"
+              matInput
+              placeholder="Insert student year"
+            />
+          </mat-form-field>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!updateUserForm.valid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Delete">
+      <form [formGroup]="deleteUserForm" (ngSubmit)="onSubmitDelete()">
+        <mat-form-field appearance="fill">
+          <mat-label>User to delete</mat-label>
+          <mat-select
+            formControlName="Id"
+            (selectionChange)="onSelectUserToDelete($event)"
+          >
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.FirstName }} {{ user.LastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!isSelectedUserToDelete"
+        >
+          Delete
+        </button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="close()">Close</button>
+</mat-dialog-actions>

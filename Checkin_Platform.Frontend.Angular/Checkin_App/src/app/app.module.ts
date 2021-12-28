@@ -27,6 +27,10 @@ import { ScheduleDayComponent } from './components/schedule-day/schedule-day.com
 import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
 import { LoginComponent } from './components/dialogs/login/login.component';
 import { ManageClassesComponent } from './components/dialogs/manage-classes/manage-classes.component';
+import { ManageClassroomsComponent } from './components/dialogs/manage-classrooms/manage-classrooms.component';
+import { ManageFeaturesComponent } from './components/dialogs/manage-features/manage-features.component';
+import { ManageUsersComponent } from './components/dialogs/manage-users/manage-users.component';
+import { ManageSchedulesComponent } from './components/dialogs/manage-schedules/manage-schedules.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { ManageClassesComponent } from './components/dialogs/manage-classes/mana
     ScheduleItemComponent,
     LoginComponent,
     ManageClassesComponent,
+    ManageClassroomsComponent,
+    ManageFeaturesComponent,
+    ManageUsersComponent,
+    ManageSchedulesComponent,
   ],
   imports: [
     BrowserModule,

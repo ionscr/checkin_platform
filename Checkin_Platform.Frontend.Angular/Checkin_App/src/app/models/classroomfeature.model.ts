@@ -6,3 +6,7 @@ export interface ClassroomFeature {
   Feature: Feature;
   Classroom: Classroom;
 }
+export interface ClassroomFeatureDto {
+  FeatureId: number;
+  ClassroomId: number;
+}

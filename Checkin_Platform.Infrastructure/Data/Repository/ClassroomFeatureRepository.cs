@@ -30,5 +30,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.ClassroomFeature.FirstOrDefault(c => c.Id == id);
         }
+        public ClassroomFeature GetClassroomFeatureByProps(int featureId, int classroomId)
+        {
+            return _appDbContext.ClassroomFeature.FirstOrDefault(c =>  c.FeatureId == featureId && c.ClassroomId == classroomId);
+        }
     }
 }

@@ -15,6 +15,12 @@ export class FeatureService {
     return this.http.get<Feature[]>(`${this.apiServerUrl}`);
   }
 
+  public GetFeaturesByClassroom(id: number): Observable<Feature[]> {
+    return this.http.get<Feature[]>(`${this.apiServerUrl}/${id}`);
+  }
+  public GetOtherFeaturesByClassroom(id: number): Observable<Feature[]> {
+    return this.http.get<Feature[]>(`${this.apiServerUrl}/other/${id}`);
+  }
   public CreateFeature(feature: Feature): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiServerUrl}`, feature);
   }

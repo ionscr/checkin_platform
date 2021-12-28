@@ -34,6 +34,15 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Feature.Include(f => f.ClassroomFeatures).Where(f => f.ClassroomFeatures.Any(cf => cf.ClassroomId == classroomId)).ToList(); 
         }
+        public IEnumerable<Feature> GetOtherFeaturesByClassroom(int classroomId)
+        {
+            //Select f.Id, f.Name from Feature f left join ClassroomFeature cf on f.Id = cf.FeatureId where cf.ClassroomId != 13 or cf.ClassroomId is null;
+            var query = (from f in _appDbContext.Feature
+                        from cf in f.ClassroomFeatures.DefaultIfEmpty()
+                        where cf.ClassroomId != classroomId
+                        select new Feature{Id = f.Id , Name = f.Name}).ToList();
+            return query;
+        }
         public Feature UpdateFeature(Feature feature)
         {
             Feature updatedFeature = _appDbContext.Feature.FirstOrDefault(c => c.Id == feature.Id);

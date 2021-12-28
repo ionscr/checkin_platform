@@ -8,6 +8,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IEnumerable<ClassroomFeature> GetClassroomFeatures();
         void AddClassroomFeature(ClassroomFeature classroomFeature);
         ClassroomFeature GetClassroomFeatureById(int id);
+        ClassroomFeature GetClassroomFeatureByProps(int featureId, int classroomId);
         void DeleteClassroomFeature(ClassroomFeature classroomFeature);
         
     }

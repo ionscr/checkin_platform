@@ -10,6 +10,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         Feature GetFeatureById(int id);
         void DeleteFeature(Feature feature);
         IEnumerable<Feature> GetFeaturesByClassroom(int classroomId);
+        IEnumerable<Feature> GetOtherFeaturesByClassroom(int classroomId);
         Feature UpdateFeature(Feature feature);
     }
 }
