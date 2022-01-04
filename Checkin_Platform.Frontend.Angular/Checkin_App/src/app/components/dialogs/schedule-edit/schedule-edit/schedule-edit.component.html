@@ -1,61 +1,7 @@
-<h2 mat-dialog-title>Manage Schedules</h2>
+<h2 mat-dialog-title>Edit schedule</h2>
 <mat-dialog-content class="mat-typography">
   <mat-tab-group (selectedTabChange)="onChange()">
-    <mat-tab label="Add">
-      <form [formGroup]="newScheduleForm" (ngSubmit)="onSubmitAdd()">
-        <mat-form-field appearance="outline">
-          <mat-label>Choose a date</mat-label>
-          <input
-            formControlName="Date"
-            matInput
-            [matDatepickerFilter]="myFilter"
-            [matDatepicker]="picker"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Choose time</mat-label>
-          <input formControlName="Time" matInput type="time" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Select class</mat-label>
-          <mat-select formControlName="Class">
-            <mat-option *ngFor="let class of classes" [value]="class.Id">
-              {{ class.Name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Select classroom</mat-label>
-          <mat-select formControlName="Classroom">
-            <mat-option
-              *ngFor="let classroom of classrooms"
-              [value]="classroom.Id"
-            >
-              {{ classroom.Name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <button
-          mat-button
-          color="primary"
-          type="submit"
-          [disabled]="!newScheduleForm.valid"
-        >
-          Submit
-        </button>
-      </form>
-    </mat-tab>
-
-    <mat-tab label="Update">
+    <mat-tab label="Edit">
       <form [formGroup]="updateScheduleForm" (ngSubmit)="onSubmitUpdate()">
         <mat-form-field appearance="fill">
           <mat-label>Schedule to update</mat-label>

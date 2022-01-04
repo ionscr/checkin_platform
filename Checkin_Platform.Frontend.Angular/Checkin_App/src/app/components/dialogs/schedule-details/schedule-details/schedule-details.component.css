@@ -1,0 +1,7 @@
+mat-dialog-content{
+    min-width: 70vh;
+}
+
+:host::ng-deep .mat-grid-tile-content {
+    justify-content: left;
+}

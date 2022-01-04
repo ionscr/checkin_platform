@@ -2,6 +2,7 @@
 using Checkin_Platform.Core.Commands.Class;
 using Checkin_Platform.Core.Exceptions;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

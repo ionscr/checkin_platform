@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class LoginService {
   logged: boolean = false;
-  user?: User;
+  user: User;
   loggedChange: Subject<boolean> = new Subject<boolean>();
   constructor() {
     this.loggedChange.subscribe((value) => {
@@ -28,7 +28,7 @@ export class LoginService {
     localStorage.setItem('currentUser', JSON.stringify(this.user));
   }
   logOut() {
-    this.user = undefined;
+    this.user = <User>{};
     this.loggedChange.next(false);
     localStorage.setItem('isLoggedIn', this.logged.toString());
     localStorage.setItem('currentUser', '');
@@ -36,7 +36,7 @@ export class LoginService {
   getLogged() {
     return this.logged;
   }
-  getUser() {
+  getUser(): User {
     return this.user;
   }
 }

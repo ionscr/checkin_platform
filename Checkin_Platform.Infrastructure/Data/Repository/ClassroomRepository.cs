@@ -23,6 +23,21 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public void DeleteClassroom(Classroom classroom)
         {
+            var classroomFeatures = _appDbContext.ClassroomFeature.Where(c => c.ClassroomId == classroom.Id);
+            foreach (var classroomFeature in classroomFeatures)
+            {
+                _appDbContext.ClassroomFeature.Remove(classroomFeature);
+            }
+            var classroomSchedules = _appDbContext.Schedule.Where(s => s.ClassroomId == classroom.Id);
+            foreach (var classroomSchedule in classroomSchedules)
+            {
+                var userSchedules = _appDbContext.UserSchedule.Where(c => c.ScheduleId == classroomSchedule.Id);
+                foreach (var userSchedule in userSchedules)
+                {
+                    _appDbContext.UserSchedule.Remove(userSchedule);
+                }
+                _appDbContext.Schedule.Remove(classroomSchedule);
+            }
             _appDbContext.Classroom.Remove(classroom);
         }
         public Classroom GetClassroomById(int id)

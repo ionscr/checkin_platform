@@ -17,6 +17,12 @@ export class UserService {
   public GetUsersByRole(role: String): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiServerUrl}/role/${role}`);
   }
+  public GetUsersBySchedule(scheduleId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiServerUrl}/${scheduleId}`);
+  }
+  public GetOtherUsersBySchedule(scheduleId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiServerUrl}/other/${scheduleId}`);
+  }
   public GetRoles(): Observable<String[]> {
     return this.http.get<String[]>(`${this.apiServerUrl}/roles`);
   }

@@ -25,7 +25,7 @@ namespace Checkin_Platform
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer(@"Server=localhost;Database=CheckinPlatform;Trusted_Connection=True;")
+                options => options.UseSqlServer(@"Server=localhost;Database=CheckinPlatform;Trusted_Connection=True;MultipleActiveResultSets = True")
             );
             services.AddMediatR(typeof(AssemblyMarker));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

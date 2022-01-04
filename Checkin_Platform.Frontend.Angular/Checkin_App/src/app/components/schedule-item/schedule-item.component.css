@@ -1,0 +1,6 @@
+mat-card{
+    margin: 0 15px 10px 15px;
+}
+mat-card-content{
+    text-align: left;
+}

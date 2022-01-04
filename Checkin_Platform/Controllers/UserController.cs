@@ -46,7 +46,28 @@ namespace Checkin_Platform.Controllers
             var result = await _mediator.Send(getUsersRolesQuery);
             return Ok(result);
         }
-
+        [Route("{scheduleId}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetUsersBySchedule(int scheduleId)
+        {
+            var getUsersByScheduleQuery = new GetUsersByScheduleQuery()
+            {
+                ScheduleId = scheduleId
+            };
+            var result = await _mediator.Send(getUsersByScheduleQuery);
+            return Ok(result);
+        }
+        [Route("other/{scheduleId}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetOtherUsersBySchedule(int scheduleId)
+        {
+            var getOtherUsersByScheduleQuery = new GetOtherUsersByScheduleQuery()
+            {
+                ScheduleId = scheduleId
+            };
+            var result = await _mediator.Send(getOtherUsersByScheduleQuery);
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<ActionResult<bool>> CreateUser([FromBody] SetUserDto userDto)
         {

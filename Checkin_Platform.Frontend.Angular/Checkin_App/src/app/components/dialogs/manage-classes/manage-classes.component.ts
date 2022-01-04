@@ -61,15 +61,19 @@ export class ManageClassesComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+  onSelectTeacherToUpdate($event: MatSelectChange) {
+    this.updateTeacher = this.teachers.find((t) => t.Id == $event.value);
+  }
   onSelectClassToUpdate($event: MatSelectChange) {
     this.isSelectedClassToUpdate = true;
     this.selectedClassToUpdateId = $event.value.Id;
     this.updateClassForm.patchValue({
       Name: $event.value.Name,
-      Teacher: $event.value.Teacher,
+      Teacher: $event.value.Teacher.Id,
       Year: $event.value.Year,
       Section: $event.value.Section,
     });
+    this.updateTeacher = $event.value.Teacher;
   }
   onSelectClassToDelete($event: MatSelectChange) {
     this.isSelectedClassToDelete = true;
@@ -83,16 +87,19 @@ export class ManageClassesComponent implements OnInit {
     });
   }
   onSubmitUpdate() {
-    this.updateClassForm.patchValue({
-      Id: this.selectedClassToUpdateId,
-    });
-    this.classService
-      .UpdateClass(this.updateClassForm.value)
-      .subscribe((val) => {
-        if (val) this.updateClassForm.reset();
-        this.getClasses();
-        this.getTeachers();
+    if (this.updateTeacher != undefined) {
+      this.updateClassForm.patchValue({
+        Id: this.selectedClassToUpdateId,
+        Teacher: this.updateTeacher,
       });
+      this.classService
+        .UpdateClass(this.updateClassForm.value)
+        .subscribe((val) => {
+          if (val) this.updateClassForm.reset();
+          this.getClasses();
+          this.getTeachers();
+        });
+    }
   }
   onSubmitDelete() {
     this.classService

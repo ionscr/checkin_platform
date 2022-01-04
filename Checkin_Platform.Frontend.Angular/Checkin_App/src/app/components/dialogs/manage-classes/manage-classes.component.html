@@ -73,8 +73,11 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Teacher</mat-label>
-            <mat-select formControlName="Teacher" [(value)]="updateTeacher">
-              <mat-option *ngFor="let teacher of teachers" [value]="teacher"
+            <mat-select
+              (selectionChange)="onSelectTeacherToUpdate($event)"
+              formControlName="Teacher"
+            >
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.Id"
                 >{{ teacher.FirstName }} {{ teacher.LastName }}</mat-option
               >
             </mat-select>

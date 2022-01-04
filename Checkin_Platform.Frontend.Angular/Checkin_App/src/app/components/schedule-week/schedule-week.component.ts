@@ -1,8 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit, Input, Output, SimpleChanges } from '@angular/core';
-import { Schedule } from 'src/app/models/schedule.model';
-import { ScheduleGroup } from 'src/app/models/schedule_group.model';
+import { ScheduleGroup } from 'src/app/models/schedule.model';
 import { DateService } from 'src/app/services/date/date.service';
+import { RefreshService } from 'src/app/services/refresh/refresh.service';
 import { ScheduleService } from 'src/app/services/schedule/schedule.service';
 
 @Component({
@@ -17,10 +17,13 @@ export class ScheduleWeekComponent implements OnInit {
   weekSchedules: ScheduleGroup[] = [];
   constructor(
     private dateService: DateService,
+    private refreshService: RefreshService,
     private scheduleService: ScheduleService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.refreshService.assignRefresh(this.getWeekSchedules.bind(this));
+  }
   ngOnChanges(changes: SimpleChanges) {
     this.generateDates();
     this.getWeekSchedules();

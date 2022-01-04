@@ -8,6 +8,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IEnumerable<UserSchedule> GetUserSchedules();
         void AddUserSchedule(UserSchedule userSchedule);
         UserSchedule GetUserScheduleById(int id);
+        UserSchedule GetUserScheduleByProps(int userId, int scheduleId);
         void DeleteUserSchedule(UserSchedule userSchedule);
 
     }

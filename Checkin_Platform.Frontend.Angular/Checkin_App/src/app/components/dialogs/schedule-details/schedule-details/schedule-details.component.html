@@ -1,0 +1,110 @@
+<h2 mat-dialog-title>Schedule details</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Class name: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Class.Name }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Class section: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Class.Section }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Class year: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Class.Year }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Date & Time: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.DateTime | date: "d/MM/yy HH:mm" }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Teacher name: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Class.Teacher.FirstName }}
+      {{ schedule.Class.Teacher.LastName }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Teacher department: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Class.Teacher.Department }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Classroom name: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Classroom.Name }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Classroom location: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ schedule.Classroom.Location }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile colspan="1">
+      <b>Classroom capacity: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{ reservations }}/{{ schedule.Classroom.Capacity }}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="3">
+    <mat-grid-tile colspan="1">
+      <b>Classroom features: </b>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <mat-chip-list
+        ><mat-chip *ngFor="let feature of features" color="primary" selected>{{
+          feature.Name
+        }}</mat-chip></mat-chip-list
+      >
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    color="primary"
+    *ngIf="user.Role == 'Student' && !hasReservation"
+    (click)="addReservation()"
+  >
+    Reserve
+  </button>
+  <button
+    mat-button
+    color="warn"
+    *ngIf="user.Role == 'Student' && hasReservation"
+    (click)="removeReservation()"
+  >
+    Remove reservation
+  </button>
+  <button mat-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

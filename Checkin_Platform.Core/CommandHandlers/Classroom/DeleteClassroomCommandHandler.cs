@@ -25,11 +25,6 @@ namespace Checkin_Platform.Core.CommandHandlers.Classroom
             {
                 throw new EntityNotFoundException("Classroom", request.Id);
             }
-            var classroomFeatures = _unitOfWork.ClassroomFeatureRepository.GetClassroomFeatures().Where(c => c.ClassroomId == request.Id);
-            foreach(var classroomFeature in classroomFeatures)
-            {
-                _unitOfWork.ClassroomFeatureRepository.DeleteClassroomFeature(classroomFeature);
-            }
             _unitOfWork.ClassroomRepository.DeleteClassroom(item);
             _unitOfWork.SaveChanges();
             return true;

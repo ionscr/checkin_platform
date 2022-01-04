@@ -26,6 +26,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public void DeleteSchedule(Schedule schedule)
         {
+            var userSchedules = _appDbContext.UserSchedule.Where(c => c.ScheduleId == schedule.Id);
+            foreach (var userSchedule in userSchedules)
+            {
+                _appDbContext.UserSchedule.Remove(userSchedule);
+            }
             _appDbContext.Schedule.Remove(schedule);
         }
         public Schedule GetScheduleById(int id)

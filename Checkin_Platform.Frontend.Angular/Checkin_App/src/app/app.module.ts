@@ -16,6 +16,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +37,10 @@ import { ManageClassroomsComponent } from './components/dialogs/manage-classroom
 import { ManageFeaturesComponent } from './components/dialogs/manage-features/manage-features.component';
 import { ManageUsersComponent } from './components/dialogs/manage-users/manage-users.component';
 import { ManageSchedulesComponent } from './components/dialogs/manage-schedules/manage-schedules.component';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { CustomDateAdapter } from './models/data_adapter.model';
+import { ScheduleDetailsComponent } from './components/dialogs/schedule-details/schedule-details/schedule-details.component';
+import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedule-edit/schedule-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +56,8 @@ import { ManageSchedulesComponent } from './components/dialogs/manage-schedules/
     ManageFeaturesComponent,
     ManageUsersComponent,
     ManageSchedulesComponent,
+    ScheduleDetailsComponent,
+    ScheduleEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,17 +68,28 @@ import { ManageSchedulesComponent } from './components/dialogs/manage-schedules/
     MatSelectModule,
     MatDividerModule,
     MatStepperModule,
+    MatChipsModule,
     MatTabsModule,
     MatIconModule,
     MatTableModule,
+    MatCardModule,
+    MatGridListModule,
     MatMenuModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
+    MatNativeDateModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+    CustomDateAdapter,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -40,13 +40,13 @@ namespace Checkin_Platform.Controllers
             return Ok(true);
         }
 
-        [Route("{userScheduleId}")]
         [HttpDelete]
-        public async Task<ActionResult<bool>> DeleteUserSchedule(int userScheduleId)
+        public async Task<ActionResult<bool>> DeleteUserSchedule([FromBody] SetUserScheduleDto userScheduleDto)
         {
             var deleteUserScheduleCommand = new DeleteUserScheduleCommand()
             {
-                Id = userScheduleId
+                UserId = userScheduleDto.UserId,
+                ScheduleId = userScheduleDto.ScheduleId
             };
             var result = await _mediator.Send(deleteUserScheduleCommand);
             return Ok(true);

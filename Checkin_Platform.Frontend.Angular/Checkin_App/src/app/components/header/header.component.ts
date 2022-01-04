@@ -8,6 +8,7 @@ import { ManageClassroomsComponent } from '../dialogs/manage-classrooms/manage-c
 import { ManageFeaturesComponent } from '../dialogs/manage-features/manage-features.component';
 import { ManageUsersComponent } from '../dialogs/manage-users/manage-users.component';
 import { ManageSchedulesComponent } from '../dialogs/manage-schedules/manage-schedules.component';
+import { RefreshService } from 'src/app/services/refresh/refresh.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,11 @@ export class HeaderComponent implements OnInit {
   title: string = 'Check-in Platform';
   logged: boolean = false;
   currentUser?: User;
-  constructor(private loginService: LoginService, public dialog: MatDialog) {}
+  constructor(
+    private loginService: LoginService,
+    public dialog: MatDialog,
+    private refreshService: RefreshService
+  ) {}
 
   ngOnInit(): void {
     this.loginService.loggedChange.subscribe((value) => (this.logged = value));
@@ -31,24 +36,41 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result != undefined) this.loginService.logIn(result);
       if (this.logged) this.currentUser = this.loginService.getUser();
+      this.refreshService.callRefresh();
     });
   }
   LogOut() {
     this.loginService.logOut();
+    this.refreshService.callRefresh();
   }
   manageClasses() {
     const dialogRef = this.dialog.open(ManageClassesComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
   }
   manageClassrooms() {
     const dialogRef = this.dialog.open(ManageClassroomsComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
   }
   manageFeatures() {
     const dialogRef = this.dialog.open(ManageFeaturesComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
   }
   manageSchedules() {
     const dialogRef = this.dialog.open(ManageSchedulesComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
   }
   manageUsers() {
     const dialogRef = this.dialog.open(ManageUsersComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
   }
 }

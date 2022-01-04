@@ -25,11 +25,6 @@ namespace Checkin_Platform.Core.CommandHandlers.Schedule
             {
                 throw new EntityNotFoundException("Schedule", request.Id);
             }
-            var userSchedules = _unitOfWork.UserScheduleRepository.GetUserSchedules().Where(c => c.ScheduleId == request.Id);
-            foreach (var userSchedule in userSchedules)
-            {
-                _unitOfWork.UserScheduleRepository.DeleteUserSchedule(userSchedule);
-            }
             _unitOfWork.ScheduleRepository.DeleteSchedule(item);
             _unitOfWork.SaveChanges();
             return true;

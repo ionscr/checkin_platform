@@ -6,3 +6,8 @@ export interface UserSchedule {
   User: User;
   Schedule: Schedule;
 }
+
+export interface UserScheduleDto {
+  UserId: number;
+  ScheduleId: number;
+}

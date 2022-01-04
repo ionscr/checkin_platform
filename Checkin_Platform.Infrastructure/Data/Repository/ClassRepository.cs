@@ -24,6 +24,16 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public void DeleteClass(Class classToDelete)
         {
+            var classSchedules = _appDbContext.Schedule.Where(s => s.ClassId == classToDelete.Id);
+            foreach (var classSchedule in classSchedules)
+            {
+                var userSchedules = _appDbContext.UserSchedule.Where(c => c.ScheduleId == classSchedule.Id);
+                foreach (var userSchedule in userSchedules)
+                {
+                    _appDbContext.UserSchedule.Remove(userSchedule);
+                }
+                _appDbContext.Schedule.Remove(classSchedule);
+            }
             _appDbContext.Class.Remove(classToDelete);
         }
         public Class GetClassById(int id)

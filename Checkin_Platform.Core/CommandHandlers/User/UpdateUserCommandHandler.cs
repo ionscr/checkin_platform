@@ -20,6 +20,7 @@ namespace Checkin_Platform.Core.CommandHandlers.User
             var item = _unitOfWork.UserRepository.GetUserById(request.UserDto.Id);
             item.FirstName = request.UserDto.FirstName;
             item.LastName = request.UserDto.LastName;
+            item.Role = request.UserDto.Role;
             if(item.Role == "Student")
             {
                 item.Year = request.UserDto.Year;

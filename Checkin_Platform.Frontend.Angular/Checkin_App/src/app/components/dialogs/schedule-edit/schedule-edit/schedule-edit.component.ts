@@ -12,13 +12,12 @@ import { formatDate } from '@angular/common';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user.model';
 import { UserScheduleService } from 'src/app/services/userschedule/userschedule.service';
-
 @Component({
-  selector: 'app-manage-schedules',
-  templateUrl: './manage-schedules.component.html',
-  styleUrls: ['./manage-schedules.component.css'],
+  selector: 'app-schedule-edit',
+  templateUrl: './schedule-edit.component.html',
+  styleUrls: ['./schedule-edit.component.css'],
 })
-export class ManageSchedulesComponent implements OnInit {
+export class ScheduleEditComponent implements OnInit {
   schedules: Schedule[] = [];
   classes: Class[] = [];
   classrooms: Classroom[] = [];
@@ -34,12 +33,6 @@ export class ManageSchedulesComponent implements OnInit {
   isSelectedScheduleToDelete: boolean = false;
   selectedScheduleToManageId: number = -1;
   isSelectedScheduleToManage: boolean = false;
-  newScheduleForm = this.fb.group({
-    Date: ['', Validators.required],
-    Time: ['', Validators.required],
-    Classroom: ['', Validators.required],
-    Class: ['', Validators.pattern],
-  });
   updateScheduleForm = this.fb.group({
     Id: [''],
     Date: ['', Validators.required],
@@ -68,7 +61,7 @@ export class ManageSchedulesComponent implements OnInit {
     private classroomService: ClassroomService,
     private userService: UserService,
     private userScheduleService: UserScheduleService,
-    private dialogRef: MatDialogRef<ManageSchedulesComponent>,
+    private dialogRef: MatDialogRef<ScheduleEditComponent>,
     private fb: FormBuilder
   ) {}
 
@@ -136,21 +129,6 @@ export class ManageSchedulesComponent implements OnInit {
     this.getReservations(this.selectedScheduleToManageId);
     this.classroomCapacity = $event.value.Classroom.Capacity;
   }
-  onSubmitAdd() {
-    const scheduleDto = {
-      DateTime:
-        formatDate(this.newScheduleForm.value.Date, 'yyyy-MM-dd', 'en-US') +
-        'T' +
-        this.newScheduleForm.value.Time +
-        ':00',
-      ClassroomId: this.newScheduleForm.value.Classroom,
-      ClassId: this.newScheduleForm.value.Class,
-    };
-    this.scheduleService.CreateSchedule(scheduleDto).subscribe((val) => {
-      if (val) this.newScheduleForm.reset();
-      this.getSchedules();
-    });
-  }
   onSubmitUpdate() {
     console.log(this.selectedClassForUpdate);
     console.log(this.selectedClassroomForUpdate);
@@ -210,7 +188,6 @@ export class ManageSchedulesComponent implements OnInit {
     this.isSelectedScheduleToUpdate = false;
     this.isSelectedScheduleToDelete = false;
     this.isSelectedScheduleToManage = false;
-    this.newScheduleForm.reset();
     this.updateScheduleForm.reset();
     this.deleteScheduleForm.reset();
   }

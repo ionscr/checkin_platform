@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Schedule } from 'src/app/models/schedule.model';
-import { ScheduleGroup } from 'src/app/models/schedule_group.model';
+import { Schedule, ScheduleDto } from 'src/app/models/schedule.model';
+import { ScheduleGroup } from 'src/app/models/schedule.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class ScheduleService {
   public GetSchedulesByWeek(date: String): Observable<ScheduleGroup[]> {
     return this.http.get<ScheduleGroup[]>(`${this.apiServerUrl}/week/${date}`);
   }
-  public CreateSchedule(schedule: Schedule): Observable<boolean> {
+  public CreateSchedule(schedule: ScheduleDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiServerUrl}`, schedule);
   }
 

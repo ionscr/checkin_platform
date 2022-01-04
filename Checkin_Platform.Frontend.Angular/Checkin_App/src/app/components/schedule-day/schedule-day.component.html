@@ -1,1 +1,4 @@
-<p *ngFor="let schedule of schedules">{{ schedule.DateTime }}</p>
+<app-schedule-item
+  *ngFor="let schedule of schedules"
+  [schedule]="schedule"
+></app-schedule-item>

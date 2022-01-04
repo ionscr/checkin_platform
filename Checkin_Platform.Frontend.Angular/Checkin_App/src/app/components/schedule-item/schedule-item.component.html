@@ -1,1 +1,47 @@
-<p>schedule-item works!</p>
+<mat-card>
+  <mat-card-title>{{ schedule.Class.Name }}</mat-card-title>
+  <mat-card-subtitle>
+    {{ schedule.DateTime | date: "d/MM/yy HH:mm" }}</mat-card-subtitle
+  >
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+    <b>Teacher:</b> {{ schedule.Class.Teacher.FirstName }}
+    {{ schedule.Class.Teacher.LastName }}
+    <br />
+    <b>Classroom:</b> {{ schedule.Classroom.Name }}
+    <br />
+    <b>Capacity:</b> {{ currentUsers.length }}/{{ totalCapacity }}
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button
+      *ngIf="
+        loggedUser.Role == 'Administrator' ||
+        loggedUser.Id == schedule.Class.Teacher.Id
+      "
+      mat-button
+      color="primary"
+      (click)="editDetails()"
+    >
+      Edit
+    </button>
+    <button
+      *ngIf="loggedUser.Role == 'Student' && !hasReservation"
+      mat-button
+      [disabled]="!(currentUsers.length < totalCapacity)"
+      color="primary"
+      (click)="addReservation()"
+    >
+      Reserve
+    </button>
+    <button
+      *ngIf="loggedUser.Role == 'Student' && hasReservation"
+      mat-button
+      color="warn"
+      (click)="removeReservation()"
+    >
+      Remove reservation
+    </button>
+    <button mat-button color="primary" (click)="openDetails()">Details</button>
+  </mat-card-actions>
+</mat-card>

@@ -18,11 +18,11 @@ namespace Checkin_Platform.Core.CommandHandlers.UserSchedule
 
         public async Task<bool> Handle(DeleteUserScheduleCommand request, CancellationToken cancellationToken)
         {
-            var item = _unitOfWork.UserScheduleRepository.GetUserScheduleById(request.Id);
+            var item = _unitOfWork.UserScheduleRepository.GetUserScheduleByProps(request.UserId, request.ScheduleId);
 
             if (item == null)
             {
-                throw new EntityNotFoundException("UserSchedule", request.Id);
+                throw new EntityNotFoundException("UserSchedule", request);
             }
             _unitOfWork.UserScheduleRepository.DeleteUserSchedule(item);
             _unitOfWork.SaveChanges();

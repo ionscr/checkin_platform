@@ -24,6 +24,11 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public void DeleteFeature(Feature feature)
         {
+            var classroomFeatures = _appDbContext.ClassroomFeature.Where(c => c.FeatureId == feature.Id);
+            foreach (var classroomFeature in classroomFeatures)
+            {
+                _appDbContext.ClassroomFeature.Remove(classroomFeature);
+            }
             _appDbContext.Feature.Remove(feature);
         }
         public Feature GetFeatureById(int id)

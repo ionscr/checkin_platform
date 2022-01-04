@@ -30,5 +30,9 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.UserSchedule.FirstOrDefault(c => c.Id == id);
         }
+        public UserSchedule GetUserScheduleByProps(int userId, int scheduleId)
+        {
+            return _appDbContext.UserSchedule.FirstOrDefault(us => us.UserId == userId && us.ScheduleId == scheduleId);
+        }
     }
 }
