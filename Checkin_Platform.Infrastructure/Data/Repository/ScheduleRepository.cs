@@ -57,13 +57,38 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
             
             return a;
         }
+        public IEnumerable<GetGroupScheduleDtoUnfixed> GetWeekSchedulesByUser(DateTime StartDate, int userId)
+        {
+            DateTime EndDate = StartDate.AddDays(5);
+            var a = _appDbContext.Schedule.Include(s => s.Class)
+                .ThenInclude(s => s.Teacher)
+                .Include(s => s.Classroom)
+                .Include(s => s.UserSchedule)
+                .Where(s => s.UserSchedule
+                .Any(us => us.User.Id == userId))
+                .Where(s => s.DateTime.Date >= StartDate.Date && s.DateTime.Date <= EndDate.Date)
+                .OrderBy(s => s.DateTime).ToList().GroupBy(g => g.DateTime.Date).Select(x => new GetGroupScheduleDtoUnfixed
+                {
+                    Date = x.Key,
+                    Schedules = x.ToList()
+                }).ToList();
+
+
+            return a;
+        }
         public IEnumerable<Schedule> GetSchedulesByTeacher(int teacherId)
         {
             return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Where(s => s.Class.Teacher.Id == teacherId).ToList();
         }
         public IEnumerable<Schedule> GetSchedulesByUserReservations(int userId)
         {
-            return _appDbContext.Schedule.Include(s => s.Class).ThenInclude(s => s.Teacher).Include(s => s.Classroom).Include(s => s.UserSchedule).Where(s => s.UserSchedule.Any(us => us.User.Id == userId)).ToList();
+            return _appDbContext.Schedule.Include(s => s.Class)
+                .ThenInclude(s => s.Teacher)
+                .Include(s => s.Classroom)
+                .Include(s => s.UserSchedule)
+                .Where(s => s.UserSchedule
+                .Any(us => us.User.Id == userId))
+                .ToList();
         }
         public Schedule UpdateSchedule(Schedule schedule)
         {

@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,8 +40,9 @@ import { ManageUsersComponent } from './components/dialogs/manage-users/manage-u
 import { ManageSchedulesComponent } from './components/dialogs/manage-schedules/manage-schedules.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { CustomDateAdapter } from './models/data_adapter.model';
-import { ScheduleDetailsComponent } from './components/dialogs/schedule-details/schedule-details/schedule-details.component';
-import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedule-edit/schedule-edit.component';
+import { ScheduleDetailsComponent } from './components/dialogs/schedule-details/schedule-details.component';
+import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedule-edit.component';
+import { ScheduleAddComponent } from './components/dialogs/schedule-add/schedule-add.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedu
     ManageSchedulesComponent,
     ScheduleDetailsComponent,
     ScheduleEditComponent,
+    ScheduleAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedu
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSlideToggleModule,
     MatFormFieldModule,
     MatNativeDateModule,
     HttpClientModule,

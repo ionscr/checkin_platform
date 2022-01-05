@@ -16,5 +16,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         IEnumerable<Schedule> GetSchedulesByUserReservations(int userId);
         Schedule UpdateSchedule(Schedule schedule);
         IEnumerable<GetGroupScheduleDtoUnfixed> GetSchedulesByWeek(DateTime StartDate);
+        IEnumerable<GetGroupScheduleDtoUnfixed> GetWeekSchedulesByUser(DateTime StartDate, int userId);
     }
 }

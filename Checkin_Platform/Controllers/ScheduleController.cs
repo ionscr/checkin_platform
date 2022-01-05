@@ -53,7 +53,18 @@ namespace Checkin_Platform.Controllers
             var result = await _mediator.Send(getSchedulesByWeekQuery);
             return Ok(result);
         }
-
+        [Route("week/{dateTime}/user/{userId}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetGroupScheduleDto>>> GetWeekSchedulesByUser(DateTime dateTime, int userId)
+        {
+            var getWeekSchedulesByUserQuery = new GetWeekSchedulesByUserQuery()
+            {
+                StartDate = dateTime,
+                UserId = userId
+            };
+            var result = await _mediator.Send(getWeekSchedulesByUserQuery);
+            return Ok(result);
+        }
         [Route("teacher/{teacherId}")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetScheduleDto>>> GetSchedulesByTeacher(int teacherId)

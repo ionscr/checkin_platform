@@ -13,3 +13,13 @@ justify-content: space-between;
     text-align: center;
     vertical-align: middle;
 }
+mat-toolbar{
+    background: rgb(245,245,245);
+    background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);
+}
+.margin-15{
+    margin-right:15px;
+}
+.logo{
+    max-width: 380px;
+}

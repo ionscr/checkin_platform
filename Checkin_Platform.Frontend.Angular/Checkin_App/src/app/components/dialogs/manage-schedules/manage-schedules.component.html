@@ -45,7 +45,7 @@
         </mat-form-field>
 
         <button
-          mat-button
+          mat-raised-button
           color="primary"
           type="submit"
           [disabled]="!newScheduleForm.valid"
@@ -118,7 +118,7 @@
             </mat-select>
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="!updateScheduleForm.valid"
@@ -143,8 +143,8 @@
           </mat-select>
         </mat-form-field>
         <button
-          mat-button
-          color="primary"
+          mat-stroked-button
+          color="warn"
           type="submit"
           [disabled]="!isSelectedScheduleToDelete"
         >
@@ -180,7 +180,7 @@
             </mat-select>
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="
@@ -201,7 +201,7 @@
           </mat-form-field>
           <button
             *ngIf="currentCapacity < classroomCapacity"
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="
@@ -212,7 +212,7 @@
           </button>
           <button
             *ngIf="currentCapacity >= classroomCapacity"
-            mat-button
+            mat-raised-button
             color="warn"
           >
             Capacity is full.
@@ -223,5 +223,5 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="close()">Close</button>
+  <button mat-raised-button color="warn" (click)="close()">Close</button>
 </mat-dialog-actions>

@@ -9,6 +9,7 @@ import { ManageFeaturesComponent } from '../dialogs/manage-features/manage-featu
 import { ManageUsersComponent } from '../dialogs/manage-users/manage-users.component';
 import { ManageSchedulesComponent } from '../dialogs/manage-schedules/manage-schedules.component';
 import { RefreshService } from 'src/app/services/refresh/refresh.service';
+import { ScheduleAddComponent } from '../dialogs/schedule-add/schedule-add.component';
 
 @Component({
   selector: 'app-header',
@@ -63,6 +64,12 @@ export class HeaderComponent implements OnInit {
   }
   manageSchedules() {
     const dialogRef = this.dialog.open(ManageSchedulesComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callRefresh();
+    });
+  }
+  addSchedule() {
+    const dialogRef = this.dialog.open(ScheduleAddComponent);
     dialogRef.afterClosed().subscribe(() => {
       this.refreshService.callRefresh();
     });

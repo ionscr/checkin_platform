@@ -1,22 +1,9 @@
 <h2 mat-dialog-title>Edit schedule</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-tab-group (selectedTabChange)="onChange()">
+  <mat-tab-group>
     <mat-tab label="Edit">
       <form [formGroup]="updateScheduleForm" (ngSubmit)="onSubmitUpdate()">
-        <mat-form-field appearance="fill">
-          <mat-label>Schedule to update</mat-label>
-          <mat-select
-            formControlName="Id"
-            (selectionChange)="onSelectScheduleToUpdate($event)"
-          >
-            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
-              {{ schedule.Class.Name }} <i>at </i>
-              {{ schedule.DateTime | date: "d/MM/yy HH:mm" }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <div class="updateForm" *ngIf="isSelectedScheduleToUpdate">
+        <div class="updateForm">
           <mat-form-field appearance="outline">
             <mat-label>Choose a date</mat-label>
             <input
@@ -64,7 +51,7 @@
             </mat-select>
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="!updateScheduleForm.valid"
@@ -74,44 +61,8 @@
         </div>
       </form>
     </mat-tab>
-    <mat-tab label="Delete">
-      <form [formGroup]="deleteScheduleForm" (ngSubmit)="onSubmitDelete()">
-        <mat-form-field appearance="fill">
-          <mat-label>Schedule to delete</mat-label>
-          <mat-select
-            formControlName="Id"
-            (selectionChange)="onSelectScheduleToDelete($event)"
-          >
-            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
-              {{ schedule.Class.Name }} <i>at </i>
-              {{ schedule.DateTime | date: "d/MM/yy HH:mm" }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button
-          mat-button
-          color="primary"
-          type="submit"
-          [disabled]="!isSelectedScheduleToDelete"
-        >
-          Delete
-        </button>
-      </form>
-    </mat-tab>
     <mat-tab label="Manage reservations">
-      <form>
-        <mat-form-field appearance="fill">
-          <mat-label>Schedule to manage</mat-label>
-          <mat-select (selectionChange)="onSelectScheduleToManage($event)">
-            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
-              {{ schedule.Class.Name }} <i>at </i>
-              {{ schedule.DateTime | date: "d/MM/yy HH:mm" }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-      <mat-divider></mat-divider>
-      <div class="manageForm" *ngIf="isSelectedScheduleToManage">
+      <div class="manageForm">
         <p>Capacity : {{ currentCapacity }} / {{ classroomCapacity }}</p>
         <form
           [formGroup]="removeReservationsForm"
@@ -120,18 +71,16 @@
           <mat-form-field appearance="outline">
             <mat-label>Remove a reservation</mat-label>
             <mat-select formControlName="UserId">
-              <mat-option *ngFor="let user of users" [value]="user.Id">
+              <mat-option *ngFor="let user of currentUsers" [value]="user.Id">
                 {{ user.FirstName }} {{ user.LastName }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="
-              !isSelectedScheduleToManage || !removeReservationsForm.valid
-            "
+            [disabled]="!removeReservationsForm.valid"
           >
             Remove
           </button>
@@ -147,18 +96,16 @@
           </mat-form-field>
           <button
             *ngIf="currentCapacity < classroomCapacity"
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="
-              !isSelectedScheduleToManage || !addReservationsForm.valid
-            "
+            [disabled]="!addReservationsForm.valid"
           >
             Add
           </button>
           <button
             *ngIf="currentCapacity >= classroomCapacity"
-            mat-button
+            mat-raised-button
             color="warn"
           >
             Capacity is full.
@@ -169,5 +116,8 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="close()">Close</button>
+  <button mat-stroked-button color="warn" (click)="onSubmitDelete()">
+    Delete schedule
+  </button>
+  <button mat-raised-button color="warn" (click)="close()">Close</button>
 </mat-dialog-actions>

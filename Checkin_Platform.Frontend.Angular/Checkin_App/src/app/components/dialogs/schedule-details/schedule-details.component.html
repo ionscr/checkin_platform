@@ -91,20 +91,20 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button
-    mat-button
+    mat-raised-button
     color="primary"
-    *ngIf="user.Role == 'Student' && !hasReservation"
+    *ngIf="user != undefined && user.Role == 'Student' && !hasReservation"
     (click)="addReservation()"
   >
     Reserve
   </button>
   <button
-    mat-button
+    mat-stroked-button
     color="warn"
-    *ngIf="user.Role == 'Student' && hasReservation"
+    *ngIf="user != undefined && user.Role == 'Student' && hasReservation"
     (click)="removeReservation()"
   >
     Remove reservation
   </button>
-  <button mat-button color="primary" (click)="close()">Close</button>
+  <button mat-raised-button color="warn" (click)="close()">Close</button>
 </mat-dialog-actions>

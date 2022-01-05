@@ -6,6 +6,7 @@ namespace Checkin_Platform.Core.Abstract.Repository
     public interface IClassRepository
     {
         IEnumerable<Class> GetClasses();
+        IEnumerable<Class> GetClassesByTeacher(int teacherId);
         void AddClass(Class classToAdd);
         Class GetClassById(int id);
         Class UpdateClass(Class Class);

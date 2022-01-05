@@ -18,6 +18,14 @@ export class ScheduleService {
   public GetSchedulesByWeek(date: String): Observable<ScheduleGroup[]> {
     return this.http.get<ScheduleGroup[]>(`${this.apiServerUrl}/week/${date}`);
   }
+  public GetWeekSchedulesByUser(
+    date: String,
+    userId: number
+  ): Observable<ScheduleGroup[]> {
+    return this.http.get<ScheduleGroup[]>(
+      `${this.apiServerUrl}/week/${date}/user/${userId}`
+    );
+  }
   public CreateSchedule(schedule: ScheduleDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiServerUrl}`, schedule);
   }

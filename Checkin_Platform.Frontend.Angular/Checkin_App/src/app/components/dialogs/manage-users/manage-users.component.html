@@ -57,7 +57,7 @@
           />
         </mat-form-field>
         <button
-          mat-button
+          mat-raised-button
           color="primary"
           type="submit"
           [disabled]="!newUserForm.valid"
@@ -145,7 +145,7 @@
             />
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="primary"
             type="submit"
             [disabled]="!updateUserForm.valid"
@@ -169,8 +169,8 @@
           </mat-select>
         </mat-form-field>
         <button
-          mat-button
-          color="primary"
+          mat-stroked-button
+          color="warn"
           type="submit"
           [disabled]="!isSelectedUserToDelete"
         >
@@ -181,5 +181,5 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="close()">Close</button>
+  <button mat-raised-button color="warn" (click)="close()">Close</button>
 </mat-dialog-actions>

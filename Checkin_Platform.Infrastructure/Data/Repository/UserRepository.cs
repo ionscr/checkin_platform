@@ -32,12 +32,16 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         }
         public IEnumerable<User> GetOtherUsersBySchedule(int ScheduleId)
         {
-            var query = (from u in _appDbContext.User
-                         where u.Role == "Student"
-                         from us in u.UserSchedule.DefaultIfEmpty()
-                         where us.ScheduleId != ScheduleId
-                         select new User { Id = u.Id, FirstName = u.FirstName, LastName = u.LastName, Role = u.Role, Year = u.Year, Group = u.Group }).ToList();
-            return query;
+            var allUsers = GetUsersByRole("Student");
+            var currentUsers = GetUsersBySchedule(ScheduleId);
+            var otherUsers = allUsers.Except(currentUsers);
+            return otherUsers.ToList();
+            //var query = (from u in _appDbContext.User
+            //             where u.Role == "Student"
+            //             from us in u.UserSchedule.DefaultIfEmpty()
+            //             where us.ScheduleId != ScheduleId
+            //             select new User { Id = u.Id, FirstName = u.FirstName, LastName = u.LastName, Role = u.Role, Year = u.Year, Group = u.Group }).ToList();
+            //return query;
         }
         public void AddUser(User user)
         {

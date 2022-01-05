@@ -1,12 +1,26 @@
 <mat-toolbar>
   <div>
-    <span>{{ title }}</span>
+    <span><img class="logo" src="assets/logo-transparent.png" /></span>
   </div>
   <div class="login">
     <p *ngIf="logged && currentUser != undefined">
       Welcome, <i>{{ currentUser.FirstName }} {{ currentUser.LastName }}</i>
     </p>
     <div class="control_buttons">
+      <div
+        *ngIf="
+          logged && currentUser != undefined && currentUser.Role == 'Teacher'
+        "
+      >
+        <button
+          class="margin-15"
+          mat-raised-button
+          color="primary"
+          (click)="addSchedule()"
+        >
+          Add schedule
+        </button>
+      </div>
       <div
         *ngIf="
           logged &&

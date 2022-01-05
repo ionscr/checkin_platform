@@ -29,6 +29,14 @@ namespace Checkin_Platform.Controllers
             var result = await _mediator.Send(getClassesQuery);
             return Ok(result);
         }
+        [HttpGet]
+        [Route("teacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<GetClassDto>>> GetClassesByTeacher(int teacherId)
+        {
+            var getClassesByTeacherQuery = new GetClassesByTeacherQuery() { TeacherId = teacherId };
+            var result = await _mediator.Send(getClassesByTeacherQuery);
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<ActionResult<bool>> CreateClass([FromBody] SetClassDto classDto)
         {

@@ -10,6 +10,7 @@ namespace Checkin_Platform.Core.AutoMapperProfiles
         public ScheduleProfile()
         {
             CreateMap<Schedule, GetScheduleDto>();
+            CreateMap<Schedule, GetScheduleDtoWithReservations>();
             CreateMap<SetScheduleDto, Schedule>();
             CreateMap<GetScheduleDto, Schedule>();
             CreateMap<GetGroupScheduleDtoUnfixed, GetGroupScheduleDto>();

@@ -14,7 +14,9 @@ export class ClassService {
   public GetClasses(): Observable<Class[]> {
     return this.http.get<Class[]>(`${this.apiServerUrl}`);
   }
-
+  public GetClassesByTeacher(teacherId: number): Observable<Class[]> {
+    return this.http.get<Class[]>(`${this.apiServerUrl}/teacher/${teacherId}`);
+  }
   public CreateClass(class_to_add: Class): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiServerUrl}`, class_to_add);
   }

@@ -4,3 +4,15 @@ mat-card{
 mat-card-content{
     text-align: left;
 }
+mat-card:nth-child(1){
+    margin-top:10px;
+}
+
+.mat-card-actions{
+    display:flex;
+    justify-content: center
+}
+.mat-card-actions .mat-button{
+    margin:0;
+
+}

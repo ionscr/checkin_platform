@@ -1,9 +1,45 @@
 <table class="calendar">
   <tr>
-    <td class="width10"></td>
+    <td class="width10">
+      <mat-card class="filter-card">
+        <mat-card-content>
+          <h2>Filter</h2>
+          <mat-divider></mat-divider>
+          <form class="filter-form" [formGroup]="filterForm">
+            <mat-form-field
+              ><mat-label>by teacher :</mat-label>
+              <mat-select
+                (selectionChange)="onSelectTeacherToFilter($event)"
+                formControlName="Teacher"
+              >
+                <mat-option value="-1">All Teachers</mat-option>
+                <mat-option
+                  *ngFor="let teacher of teachers"
+                  [value]="teacher.Id"
+                >
+                  {{ teacher.FirstName }} {{ teacher.LastName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="currentUser != undefined && currentUser.Role == 'Student'"
+            >
+              <mat-label>by reservations :</mat-label>
+              <mat-slide-toggle
+                (change)="onSlideToggle($event)"
+                [checked]="filterByReservations"
+                color="primary"
+              >
+              </mat-slide-toggle>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </td>
     <td *ngFor="let day of week">
       <div *ngFor="let sch of weekSchedules">
         <app-schedule-day
+          [events]="filterEvent.asObservable()"
           *ngIf="sch.Date.toString() == day + 'T00:00:00'"
           [schedules]="sch.Schedules"
         >

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Class } from 'src/app/models/class.model';
 import { Classroom } from 'src/app/models/classroom.model';
@@ -12,36 +12,30 @@ import { formatDate } from '@angular/common';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user.model';
 import { UserScheduleService } from 'src/app/services/userschedule/userschedule.service';
+export interface DialogData {
+  schedule: Schedule;
+}
 @Component({
   selector: 'app-schedule-edit',
   templateUrl: './schedule-edit.component.html',
   styleUrls: ['./schedule-edit.component.css'],
 })
 export class ScheduleEditComponent implements OnInit {
-  schedules: Schedule[] = [];
+  schedule: Schedule;
   classes: Class[] = [];
   classrooms: Classroom[] = [];
-  users: User[] = [];
+  currentUsers: User[] = [];
   otherUsers: User[] = [];
   classroomCapacity: number = 0;
   currentCapacity: number = 0;
-  selectedScheduleToUpdateId: number = -1;
-  isSelectedScheduleToUpdate: boolean = false;
   selectedClassForUpdate?: Class;
   selectedClassroomForUpdate?: Classroom;
-  selectedScheduleToDeleteId: number = -1;
-  isSelectedScheduleToDelete: boolean = false;
-  selectedScheduleToManageId: number = -1;
-  isSelectedScheduleToManage: boolean = false;
   updateScheduleForm = this.fb.group({
     Id: [''],
     Date: ['', Validators.required],
     Time: ['', Validators.required],
     Classroom: ['', Validators.required],
     Class: ['', Validators.pattern],
-  });
-  deleteScheduleForm = this.fb.group({
-    Id: [''],
   });
   removeReservationsForm = this.fb.group({
     ScheduleId: [''],
@@ -62,19 +56,17 @@ export class ScheduleEditComponent implements OnInit {
     private userService: UserService,
     private userScheduleService: UserScheduleService,
     private dialogRef: MatDialogRef<ScheduleEditComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   ngOnInit(): void {
-    this.getSchedules();
+    this.schedule = this.data.schedule;
+    this.setScheduleData();
     this.getClasses();
     this.getClassrooms();
   }
-  getSchedules() {
-    this.scheduleService
-      .GetSchedules()
-      .subscribe((schedules) => (this.schedules = schedules));
-  }
+
   getClasses() {
     this.classService
       .GetClasses()
@@ -87,7 +79,7 @@ export class ScheduleEditComponent implements OnInit {
   }
   getReservations(scheduleId: number) {
     this.userService.GetUsersBySchedule(scheduleId).subscribe((users) => {
-      this.users = users;
+      this.currentUsers = users;
       this.currentCapacity = users.length;
     });
     this.userService
@@ -97,17 +89,18 @@ export class ScheduleEditComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-  onSelectScheduleToUpdate($event: MatSelectChange) {
-    this.isSelectedScheduleToUpdate = true;
-    this.selectedScheduleToUpdateId = $event.value.Id;
+  setScheduleData() {
     this.updateScheduleForm.patchValue({
-      Date: $event.value.DateTime,
-      Time: $event.value.DateTime.slice(11, 16),
-      Classroom: $event.value.Classroom.Id,
-      Class: $event.value.Class.Id,
+      Id: this.schedule.Id,
+      Date: this.schedule.DateTime,
+      Time: this.schedule.DateTime.slice(11, 16),
+      Classroom: this.schedule.Classroom.Id,
+      Class: this.schedule.Class.Id,
     });
-    this.selectedClassForUpdate = $event.value.Class;
-    this.selectedClassroomForUpdate = $event.value.Classroom;
+    this.selectedClassForUpdate = this.schedule.Class;
+    this.selectedClassroomForUpdate = this.schedule.Classroom;
+    if (this.schedule.Id != undefined) this.getReservations(this.schedule.Id);
+    this.classroomCapacity = this.schedule.Classroom.Capacity;
   }
   onSelectClassToUpdate($event: MatSelectChange) {
     this.selectedClassForUpdate = this.classes.find(
@@ -119,25 +112,13 @@ export class ScheduleEditComponent implements OnInit {
       (c) => c.Id == $event.value
     );
   }
-  onSelectScheduleToDelete($event: MatSelectChange) {
-    this.isSelectedScheduleToDelete = true;
-    this.selectedScheduleToDeleteId = $event.value.Id;
-  }
-  onSelectScheduleToManage($event: MatSelectChange) {
-    this.isSelectedScheduleToManage = true;
-    this.selectedScheduleToManageId = $event.value.Id;
-    this.getReservations(this.selectedScheduleToManageId);
-    this.classroomCapacity = $event.value.Classroom.Capacity;
-  }
   onSubmitUpdate() {
-    console.log(this.selectedClassForUpdate);
-    console.log(this.selectedClassroomForUpdate);
     if (
       this.selectedClassForUpdate != undefined &&
       this.selectedClassroomForUpdate != undefined
     ) {
       var schedule = {
-        Id: this.selectedScheduleToUpdateId,
+        Id: this.schedule.Id,
         DateTime:
           formatDate(
             this.updateScheduleForm.value.Date,
@@ -151,44 +132,40 @@ export class ScheduleEditComponent implements OnInit {
         Class: this.selectedClassForUpdate,
       };
       this.scheduleService.UpdateSchedule(schedule).subscribe((val) => {
-        if (val) this.updateScheduleForm.reset();
-        this.getSchedules();
+        if (val) this.close();
       });
     }
   }
   onSubmitDelete() {
-    this.scheduleService
-      .DeleteSchedule(this.selectedScheduleToDeleteId)
-      .subscribe((val) => {
-        if (val) this.deleteScheduleForm.reset();
-        this.getSchedules();
+    if (this.schedule.Id != undefined)
+      this.scheduleService.DeleteSchedule(this.schedule.Id).subscribe((val) => {
+        if (val) this.close();
       });
   }
   onRemoveReservation() {
-    const usDto = {
-      UserId: this.removeReservationsForm.value.UserId,
-      ScheduleId: this.selectedScheduleToManageId,
-    };
-    this.userScheduleService.DeleteUserSchedule(usDto).subscribe((val) => {
-      if (val) this.removeReservationsForm.reset();
-      this.getReservations(this.selectedScheduleToManageId);
-    });
+    if (this.schedule.Id != undefined) {
+      var usDto = {
+        UserId: this.removeReservationsForm.value.UserId,
+        ScheduleId: this.schedule.Id,
+      };
+      this.userScheduleService.DeleteUserSchedule(usDto).subscribe((val) => {
+        if (val) this.removeReservationsForm.reset();
+        if (this.schedule.Id != undefined)
+          this.getReservations(this.schedule.Id);
+      });
+    }
   }
   onAddReservation() {
-    const usDto = {
-      UserId: this.addReservationsForm.value.UserId,
-      ScheduleId: this.selectedScheduleToManageId,
-    };
-    this.userScheduleService.CreateUserSchedule(usDto).subscribe((val) => {
-      if (val) this.addReservationsForm.reset();
-      this.getReservations(this.selectedScheduleToManageId);
-    });
-  }
-  onChange() {
-    this.isSelectedScheduleToUpdate = false;
-    this.isSelectedScheduleToDelete = false;
-    this.isSelectedScheduleToManage = false;
-    this.updateScheduleForm.reset();
-    this.deleteScheduleForm.reset();
+    if (this.schedule.Id != undefined) {
+      var usDto = {
+        UserId: this.addReservationsForm.value.UserId,
+        ScheduleId: this.schedule.Id,
+      };
+      this.userScheduleService.CreateUserSchedule(usDto).subscribe((val) => {
+        if (val) this.addReservationsForm.reset();
+        if (this.schedule.Id != undefined)
+          this.getReservations(this.schedule.Id);
+      });
+    }
   }
 }

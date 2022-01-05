@@ -18,6 +18,10 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
         {
             return _appDbContext.Class.Include(c => c.Teacher).OrderBy(c => c.Id).ToList();
         }
+        public IEnumerable<Class> GetClassesByTeacher(int teacherId)
+        {
+            return _appDbContext.Class.Include(c => c.Teacher).Where(c => c.Teacher.Id == teacherId).OrderBy(c => c.Id).ToList();
+        }
         public void AddClass(Class classToAdd)
         {
             _appDbContext.Class.Add(classToAdd);

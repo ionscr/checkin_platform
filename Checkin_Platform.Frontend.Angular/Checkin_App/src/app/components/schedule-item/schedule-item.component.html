@@ -16,8 +16,9 @@
   <mat-card-actions>
     <button
       *ngIf="
-        loggedUser.Role == 'Administrator' ||
-        loggedUser.Id == schedule.Class.Teacher.Id
+        logged &&
+        (loggedUser.Role == 'Administrator' ||
+          loggedUser.Id == schedule.Class.Teacher.Id)
       "
       mat-button
       color="primary"
@@ -26,7 +27,7 @@
       Edit
     </button>
     <button
-      *ngIf="loggedUser.Role == 'Student' && !hasReservation"
+      *ngIf="logged && loggedUser.Role == 'Student' && !hasReservation"
       mat-button
       [disabled]="!(currentUsers.length < totalCapacity)"
       color="primary"
@@ -35,7 +36,7 @@
       Reserve
     </button>
     <button
-      *ngIf="loggedUser.Role == 'Student' && hasReservation"
+      *ngIf="logged && loggedUser.Role == 'Student' && hasReservation"
       mat-button
       color="warn"
       (click)="removeReservation()"

@@ -16,7 +16,7 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button matStepperNext>Next</button>
       </div>
     </mat-step>
     <mat-step>
@@ -34,15 +34,15 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button matStepperPrevious>Back</button>
       </div>
     </mat-step>
   </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="close()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="close()">Cancel</button>
   <button
-    mat-button
+    mat-raised-button
     color="primary"
     [disabled]="selectedUser == undefined || null"
     (click)="logIn()"
