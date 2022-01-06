@@ -14,8 +14,10 @@ justify-content: space-between;
     vertical-align: middle;
 }
 mat-toolbar{
-    background: rgb(245,245,245);
-    background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);
+    //background: rgb(245,245,245);
+    //background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);
+    background-color: #E8EAF6;
+    color: #263238;
 }
 .margin-15{
     margin-right:15px;

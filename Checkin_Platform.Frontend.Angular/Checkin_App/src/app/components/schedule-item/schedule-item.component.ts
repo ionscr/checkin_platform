@@ -12,7 +12,7 @@ import { ScheduleEditComponent } from '../dialogs/schedule-edit/schedule-edit.co
 @Component({
   selector: 'app-schedule-item',
   templateUrl: './schedule-item.component.html',
-  styleUrls: ['./schedule-item.component.css'],
+  styleUrls: ['./schedule-item.component.scss'],
 })
 export class ScheduleItemComponent implements OnInit {
   @Input() schedule: Schedule;

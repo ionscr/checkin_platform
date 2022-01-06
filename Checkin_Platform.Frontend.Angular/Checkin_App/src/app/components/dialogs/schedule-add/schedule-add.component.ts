@@ -14,7 +14,7 @@ import { ScheduleService } from 'src/app/services/schedule/schedule.service';
 @Component({
   selector: 'app-schedule-add',
   templateUrl: './schedule-add.component.html',
-  styleUrls: ['./schedule-add.component.css'],
+  styleUrls: ['./schedule-add.component.scss'],
 })
 export class ScheduleAddComponent implements OnInit {
   currentUser: User;

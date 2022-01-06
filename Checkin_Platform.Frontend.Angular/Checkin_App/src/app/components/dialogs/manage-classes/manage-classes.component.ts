@@ -11,7 +11,7 @@ import { MatSelectChange } from '@angular/material/select';
 @Component({
   selector: 'app-manage-classes',
   templateUrl: './manage-classes.component.html',
-  styleUrls: ['./manage-classes.component.css'],
+  styleUrls: ['./manage-classes.component.scss'],
 })
 export class ManageClassesComponent implements OnInit {
   classes: Class[] = [];

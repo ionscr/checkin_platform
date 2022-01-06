@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Edit schedule</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-tab-group>
+  <mat-tab-group (selectedTabChange)="onChange()">
     <mat-tab label="Edit">
       <form [formGroup]="updateScheduleForm" (ngSubmit)="onSubmitUpdate()">
         <div class="updateForm">
@@ -43,10 +43,12 @@
               formControlName="Classroom"
             >
               <mat-option
-                *ngFor="let classroom of classrooms"
+                *ngFor="
+                  let classroom of classrooms | filter: filterClassroom:schedule
+                "
                 [value]="classroom.Id"
               >
-                {{ classroom.Name }}
+                {{ classroom.Name }} - Capacity: {{ classroom.Capacity }}
               </mat-option>
             </mat-select>
           </mat-form-field>

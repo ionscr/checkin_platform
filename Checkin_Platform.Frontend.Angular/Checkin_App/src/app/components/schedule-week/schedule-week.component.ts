@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-schedule-week',
   templateUrl: './schedule-week.component.html',
-  styleUrls: ['./schedule-week.component.css'],
+  styleUrls: ['./schedule-week.component.scss'],
 })
 export class ScheduleWeekComponent implements OnInit {
   @Input() weekNr = 0;

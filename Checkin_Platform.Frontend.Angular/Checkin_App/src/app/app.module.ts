@@ -43,6 +43,7 @@ import { CustomDateAdapter } from './models/data_adapter.model';
 import { ScheduleDetailsComponent } from './components/dialogs/schedule-details/schedule-details.component';
 import { ScheduleEditComponent } from './components/dialogs/schedule-edit/schedule-edit.component';
 import { ScheduleAddComponent } from './components/dialogs/schedule-add/schedule-add.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ScheduleAddComponent } from './components/dialogs/schedule-add/schedule
     ScheduleDetailsComponent,
     ScheduleEditComponent,
     ScheduleAddComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,9 @@
     "Checkin_App": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        },
         "@schematics/angular:application": {
           "strict": true
         }
@@ -28,7 +31,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -96,7 +99,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

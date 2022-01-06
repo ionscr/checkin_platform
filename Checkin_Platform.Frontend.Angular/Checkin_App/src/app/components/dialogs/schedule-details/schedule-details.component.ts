@@ -14,7 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-schedule-details',
   templateUrl: './schedule-details.component.html',
-  styleUrls: ['./schedule-details.component.css'],
+  styleUrls: ['./schedule-details.component.scss'],
 })
 export class ScheduleDetailsComponent implements OnInit {
   schedule: Schedule;

@@ -11,7 +11,7 @@ import { FeatureService } from 'src/app/services/feature/feature.service';
 @Component({
   selector: 'app-manage-classrooms',
   templateUrl: './manage-classrooms.component.html',
-  styleUrls: ['./manage-classrooms.component.css'],
+  styleUrls: ['./manage-classrooms.component.scss'],
 })
 export class ManageClassroomsComponent implements OnInit {
   classrooms: Classroom[] = [];

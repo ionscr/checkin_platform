@@ -39,7 +39,7 @@
               *ngFor="let classroom of classrooms"
               [value]="classroom.Id"
             >
-              {{ classroom.Name }}
+              {{ classroom.Name }} - Capacity: {{ classroom.Capacity }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -113,7 +113,7 @@
                 *ngFor="let classroom of classrooms"
                 [value]="classroom.Id"
               >
-                {{ classroom.Name }}
+                {{ classroom.Name }} - Capacity: {{ classroom.Capacity }}
               </mat-option>
             </mat-select>
           </mat-form-field>

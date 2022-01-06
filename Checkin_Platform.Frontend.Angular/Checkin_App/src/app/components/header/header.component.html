@@ -48,7 +48,12 @@
         </mat-menu>
       </div>
 
-      <button *ngIf="!logged" mat-raised-button (click)="LogIn()">
+      <button
+        *ngIf="!logged"
+        mat-raised-button
+        color="primary"
+        (click)="LogIn()"
+      >
         Log In
       </button>
       <button *ngIf="logged" mat-raised-button color="warn" (click)="LogOut()">

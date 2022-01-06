@@ -16,7 +16,7 @@ import { UserScheduleService } from 'src/app/services/userschedule/userschedule.
 @Component({
   selector: 'app-manage-schedules',
   templateUrl: './manage-schedules.component.html',
-  styleUrls: ['./manage-schedules.component.css'],
+  styleUrls: ['./manage-schedules.component.scss'],
 })
 export class ManageSchedulesComponent implements OnInit {
   schedules: Schedule[] = [];

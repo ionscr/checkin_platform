@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-manage-users',
   templateUrl: './manage-users.component.html',
-  styleUrls: ['./manage-users.component.css'],
+  styleUrls: ['./manage-users.component.scss'],
 })
 export class ManageUsersComponent implements OnInit {
   users: User[] = [];

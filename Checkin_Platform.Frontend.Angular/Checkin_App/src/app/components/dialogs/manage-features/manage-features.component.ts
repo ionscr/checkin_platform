@@ -8,7 +8,7 @@ import { FeatureService } from 'src/app/services/feature/feature.service';
 @Component({
   selector: 'app-manage-features',
   templateUrl: './manage-features.component.html',
-  styleUrls: ['./manage-features.component.css'],
+  styleUrls: ['./manage-features.component.scss'],
 })
 export class ManageFeaturesComponent implements OnInit {
   features: Feature[] = [];

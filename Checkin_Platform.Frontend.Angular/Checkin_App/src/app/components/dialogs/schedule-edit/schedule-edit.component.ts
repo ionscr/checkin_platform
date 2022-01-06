@@ -12,18 +12,20 @@ import { formatDate } from '@angular/common';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user.model';
 import { UserScheduleService } from 'src/app/services/userschedule/userschedule.service';
+import { LoginService } from 'src/app/services/login/login.service';
 export interface DialogData {
   schedule: Schedule;
 }
 @Component({
   selector: 'app-schedule-edit',
   templateUrl: './schedule-edit.component.html',
-  styleUrls: ['./schedule-edit.component.css'],
+  styleUrls: ['./schedule-edit.component.scss'],
 })
 export class ScheduleEditComponent implements OnInit {
   schedule: Schedule;
   classes: Class[] = [];
   classrooms: Classroom[] = [];
+  currentUser: User;
   currentUsers: User[] = [];
   otherUsers: User[] = [];
   classroomCapacity: number = 0;
@@ -56,21 +58,35 @@ export class ScheduleEditComponent implements OnInit {
     private userService: UserService,
     private userScheduleService: UserScheduleService,
     private dialogRef: MatDialogRef<ScheduleEditComponent>,
+    private loginService: LoginService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.loginService.getUser();
     this.schedule = this.data.schedule;
     this.setScheduleData();
-    this.getClasses();
     this.getClassrooms();
+    this.getClasses();
   }
-
+  filterClassroom(classroom: Classroom, schedule: Schedule) {
+    if (schedule.Users != undefined)
+      return classroom.Capacity >= schedule.Users.length;
+    return classroom.Capacity >= schedule.Classroom.Capacity;
+  }
   getClasses() {
-    this.classService
-      .GetClasses()
-      .subscribe((classes) => (this.classes = classes));
+    if (
+      this.currentUser.Role == 'Teacher' &&
+      this.currentUser.Id != undefined
+    ) {
+      this.classService
+        .GetClassesByTeacher(this.currentUser.Id)
+        .subscribe((classes) => (this.classes = classes));
+    } else
+      this.classService
+        .GetClasses()
+        .subscribe((classes) => (this.classes = classes));
   }
   getClassrooms() {
     this.classroomService
@@ -81,6 +97,7 @@ export class ScheduleEditComponent implements OnInit {
     this.userService.GetUsersBySchedule(scheduleId).subscribe((users) => {
       this.currentUsers = users;
       this.currentCapacity = users.length;
+      this.schedule.Users = this.currentUsers;
     });
     this.userService
       .GetOtherUsersBySchedule(scheduleId)
@@ -162,10 +179,17 @@ export class ScheduleEditComponent implements OnInit {
         ScheduleId: this.schedule.Id,
       };
       this.userScheduleService.CreateUserSchedule(usDto).subscribe((val) => {
-        if (val) this.addReservationsForm.reset();
+        if (val) {
+          this.addReservationsForm.reset();
+        }
         if (this.schedule.Id != undefined)
           this.getReservations(this.schedule.Id);
       });
     }
+  }
+  onChange() {
+    console.log(this.currentCapacity);
+    console.log(this.schedule.Users?.length);
+    this.getClassrooms();
   }
 }
