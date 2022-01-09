@@ -6,9 +6,6 @@
     "Checkin_App": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        },
         "@schematics/angular:application": {
           "strict": true
         }
