@@ -1,6 +1,6 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <div>
-    <span><img class="logo" src="assets/logo-transparent.png" /></span>
+    <span><img class="logo" src="assets/logo-white.png" /></span>
   </div>
   <div class="login">
     <p *ngIf="logged && currentUser != undefined">
@@ -13,9 +13,8 @@
         "
       >
         <button
-          class="margin-15"
+          class="margin-15 blue-text"
           mat-raised-button
-          color="primary"
           (click)="addSchedule()"
         >
           Add schedule
@@ -28,7 +27,7 @@
           currentUser.Role == 'Administrator'
         "
       >
-        <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+        <button mat-raised-button class="blue-text" [matMenuTriggerFor]="menu">
           Menu
         </button>
         <mat-menu #menu="matMenu">
@@ -48,9 +47,9 @@
         </mat-menu>
       </div>
       <button
+        class="blue-text"
         *ngIf="!logged"
         mat-raised-button
-        color="primary"
         (click)="LogIn()"
       >
         Log In

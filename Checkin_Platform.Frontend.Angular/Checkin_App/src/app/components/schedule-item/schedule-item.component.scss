@@ -1,8 +1,15 @@
 mat-card{
     margin: 0 15px 10px 15px;
+    // color: white;
+    // .mat-divider{
+    //     background-color: white;
+    // }
+    background: rgb(140,158,255);
+background: linear-gradient(180deg, rgba(140,158,255,0.0959734235491071) 0%, rgba(255,255,255,1) 70%);
 }
 mat-card-content{
     text-align: left;
+    margin-top: 10px;
 }
 mat-card:nth-child(1){
     margin-top:10px;

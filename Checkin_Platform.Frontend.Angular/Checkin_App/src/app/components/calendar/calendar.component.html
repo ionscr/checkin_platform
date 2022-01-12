@@ -1,24 +1,29 @@
-<table class="calendar">
+<table color="primary" class="calendar">
   <thead>
     <tr>
       <th class="width10">
         {{ monday }} - {{ friday }} <br />
-        <button mat-icon-button (click)="onBackward()" [disabled]="weekNr == 0">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="onBackward()"
+          [disabled]="weekNr == 0"
+        >
           <mat-icon aria-hidden="false" aria-label="backward-icon"
             >arrow_back_ios</mat-icon
           >
         </button>
-        <button mat-icon-button (click)="onForward()">
+        <button mat-icon-button color="primary" (click)="onForward()">
           <mat-icon aria-hidden="false" aria-label="forward-icon"
             >arrow_forward_ios</mat-icon
           >
         </button>
       </th>
-      <th class="width18">Monday</th>
-      <th class="width18">Tuesday</th>
-      <th class="width18">Wednesday</th>
-      <th class="width18">Thursday</th>
-      <th class="width18">Friday</th>
+      <th class="width18"><div class="underline">Monday</div></th>
+      <th class="width18"><div class="underline">Tuesday</div></th>
+      <th class="width18"><div class="underline">Wednesday</div></th>
+      <th class="width18"><div class="underline">Thursday</div></th>
+      <th class="width18"><div class="underline">Friday</div></th>
     </tr>
   </thead>
 </table>
