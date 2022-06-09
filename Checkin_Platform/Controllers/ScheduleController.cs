@@ -90,7 +90,7 @@ namespace Checkin_Platform.Controllers
 
         [HttpPost]
         public async Task<ActionResult<bool>> CreateSchedule([FromBody] SetScheduleDto scheduleDto)
-        {
+        {  
             var createScheduleCommand = new CreateScheduleCommand()
             {
                 ScheduleDto = scheduleDto

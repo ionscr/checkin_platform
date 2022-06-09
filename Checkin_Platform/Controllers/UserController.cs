@@ -1,6 +1,7 @@
 ﻿using Checkin_Platform.Core.Abstract;
 using Checkin_Platform.Core.Commands.User;
 using Checkin_Platform.Core.Dto;
+using Checkin_Platform.Core.Dto.User;
 using Checkin_Platform.Core.Queries.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,17 @@ namespace Checkin_Platform.Controllers
             return Ok(true);
         }
 
+        [Route("login")]
+        [HttpPost]
+        public async Task<ActionResult<GetUserDto>> Login([FromBody] LoginUserDto userDto)
+        {
+            var loginUserQuery = new LoginUserQuery()
+            {
+                UserDto = userDto
+            };
+            var result = await _mediator.Send(loginUserQuery);
+            return Ok(result);
+        }
         [HttpPut]
         public async Task<ActionResult<bool>> UpdateUser([FromBody] GetUserDto userDto)
         {
