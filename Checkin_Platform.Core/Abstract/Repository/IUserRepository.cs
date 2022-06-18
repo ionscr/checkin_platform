@@ -14,5 +14,6 @@ namespace Checkin_Platform.Core.Abstract.Repository
         User GetUserById(int id);
         void DeleteUser(User user);
         User UpdateUser(User user);
+        void UpdateEmailAndPassword(int id, string email, string password);
     }
 }

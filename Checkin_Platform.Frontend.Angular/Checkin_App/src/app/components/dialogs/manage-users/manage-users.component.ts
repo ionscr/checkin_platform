@@ -20,6 +20,8 @@ export class ManageUsersComponent implements OnInit {
   newUserForm = this.fb.group({
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
+    Email: ['', Validators.required],
+    Password: ['', Validators.required],
     Role: ['', Validators.required],
     Department: [''],
     Year: [''],
@@ -29,6 +31,8 @@ export class ManageUsersComponent implements OnInit {
     Id: [''],
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
+    Email: ['', Validators.required],
+    Password: [''],
     Role: ['', Validators.required],
     Department: [''],
     Year: [''],
@@ -60,6 +64,7 @@ export class ManageUsersComponent implements OnInit {
     this.updateUserForm.patchValue({
       FirstName: $event.value.FirstName,
       LastName: $event.value.LastName,
+      Email: $event.value.Email,
       Role: $event.value.Role,
       Department: $event.value.Department,
       Year: $event.value.Year,

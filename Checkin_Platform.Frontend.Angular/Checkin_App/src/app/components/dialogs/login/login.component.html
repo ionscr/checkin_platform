@@ -1,50 +1,43 @@
 <h2 mat-dialog-title>Log In</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-stepper orientation="vertical" #stepper>
-    <mat-step>
-      <ng-template matStepLabel>Select desired role</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Select role</mat-label>
-        <mat-select
-          (selectionChange)="roleChange($event)"
-          [(ngModel)]="selectedRole"
-          name="role"
-        >
-          <mat-option *ngFor="let role of roles" [value]="role">
-            {{ role }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Select user</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Select user</mat-label>
-        <mat-select
-          [disabled]="!(selectedRole.length > 0)"
-          [(ngModel)]="selectedUser"
-          name="user"
-        >
-          <mat-option *ngFor="let user of usersByRole" [value]="user">
-            {{ user.FirstName }} {{ user.LastName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperPrevious>Back</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      placeholder="name@checkin.platform"
+      [formControl]="email"
+      required
+    />
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input
+      matInput
+      [formControl]="password"
+      required
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="error-message" [hidden]="!showError">
+    Invalid email or password
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button color="warn" (click)="close()">Cancel</button>
   <button
     mat-raised-button
     color="primary"
-    [disabled]="selectedUser == undefined || null"
+    [disabled]="email.invalid || password.invalid"
     (click)="logIn()"
   >
     Log In

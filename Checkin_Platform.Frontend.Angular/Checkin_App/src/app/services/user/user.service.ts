@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../../models/user.model';
+import { User, UserLoginData } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +36,9 @@ export class UserService {
 
   public DeleteUser(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiServerUrl}/${id}`);
+  }
+
+  public LoginUser(userLoginData: UserLoginData) {
+    return this.http.post<User>(`${this.apiServerUrl}/login`, userLoginData);
   }
 }

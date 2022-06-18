@@ -5,6 +5,7 @@ using Checkin_Platform.Core.Dto;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Checkin_Platform.Core.CommandHandlers.User
 {
@@ -22,6 +23,7 @@ namespace Checkin_Platform.Core.CommandHandlers.User
 
         public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            request.UserDto.Password = BC.HashPassword(request.UserDto.Password); 
             var item = _mapper.Map<SetUserDto, Domain.User>(request.UserDto);
             _unitOfWork.UserRepository.AddUser(item);
             _unitOfWork.SaveChanges();

@@ -27,6 +27,7 @@ export class LoginService {
     localStorage.setItem('isLoggedIn', this.logged.toString());
     localStorage.setItem('currentUser', JSON.stringify(this.user));
   }
+
   logOut() {
     this.user = <User>{};
     this.loggedChange.next(false);

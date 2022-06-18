@@ -109,6 +109,7 @@
             *ngIf="currentCapacity >= classroomCapacity"
             mat-raised-button
             color="warn"
+            [disabled]="true"
           >
             Capacity is full.
           </button>

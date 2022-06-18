@@ -36,12 +36,6 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
             var currentUsers = GetUsersBySchedule(ScheduleId);
             var otherUsers = allUsers.Except(currentUsers);
             return otherUsers.ToList();
-            //var query = (from u in _appDbContext.User
-            //             where u.Role == "Student"
-            //             from us in u.UserSchedule.DefaultIfEmpty()
-            //             where us.ScheduleId != ScheduleId
-            //             select new User { Id = u.Id, FirstName = u.FirstName, LastName = u.LastName, Role = u.Role, Year = u.Year, Group = u.Group }).ToList();
-            //return query;
         }
         public void AddUser(User user)
         {
@@ -80,6 +74,12 @@ namespace Checkin_Platform.Infrastructure.Data.Repository
             User updatedUser = _appDbContext.User.FirstOrDefault(c => c.Id == user.Id);
             updatedUser = user;
             return updatedUser;
+        }
+        public void UpdateEmailAndPassword(int id, string email, string password)
+        {
+            User updatedUser = _appDbContext.User.FirstOrDefault(c => c.Id == id);
+            updatedUser.Email = email;
+            updatedUser.Password = password;
         }
     }
 }
